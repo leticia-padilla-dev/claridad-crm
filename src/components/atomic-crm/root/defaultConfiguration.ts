@@ -1,7 +1,8 @@
+import clarityLogo from "@/assets/_cmr.png";
 import type { ConfigurationContextValue } from "./ConfigurationContext";
 
-export const defaultDarkModeLogo = "./logos/logo_atomic_crm_dark.svg";
-export const defaultLightModeLogo = "./logos/logo_atomic_crm_light.svg";
+export const defaultDarkModeLogo = clarityLogo;
+export const defaultLightModeLogo = clarityLogo;
 
 export const defaultCurrency = "USD";
 
