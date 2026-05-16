@@ -73,12 +73,11 @@ export const HotContacts = () => {
           }
           secondaryText={(contact) => (
             <>
-              {contact.title && contact.company_name
-                ? translate("resources.contacts.position_at_company", {
-                    title: contact.title,
-                    company: contact.company_name,
+              {contact.last_seen
+                ? translate("crm.common.last_activity_with_date", {
+                    date: contact.last_seen,
                   })
-                : contact.title || contact.company_name}
+                : null}
             </>
           )}
           leftAvatar={(contact) => <Avatar record={contact} />}
