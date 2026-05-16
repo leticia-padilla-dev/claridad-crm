@@ -4,11 +4,7 @@ import { Card } from "@/components/ui/card";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 import { ActivityLog } from "../activity/ActivityLog";
-import {
-  COMPANY_CREATED,
-  DEAL_CREATED,
-  DEAL_NOTE_CREATED,
-} from "../consts";
+import { COMPANY_CREATED, DEAL_CREATED, DEAL_NOTE_CREATED } from "../consts";
 
 export function DashboardActivityLog() {
   const isMobile = useIsMobile();
