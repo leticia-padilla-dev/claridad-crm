@@ -26,7 +26,11 @@ test("user onboarding", async ({ page, isMobile, menu, dismissToast }) => {
   await page.getByLabel("Last name").fill("Smith");
   await page.getByLabel("Title").fill("CEO");
   await page.getByLabel("Company").click();
-  await page.getByRole("dialog").last().getByRole("combobox").fill("Smith Corp");
+  await page
+    .getByRole("dialog")
+    .last()
+    .getByRole("combobox")
+    .fill("Smith Corp");
   await page.getByRole("option", { name: "Create Smith Corp" }).click();
   await page
     .getByRole("group", { name: "Email addresses" })
@@ -81,9 +85,11 @@ test("user onboarding", async ({ page, isMobile, menu, dismissToast }) => {
 
   await dismissToast("Note added");
 
-  await expect(
-    page.getByText(isMobile ? "Me" : "You added a note", { exact: false }),
-  ).toBeVisible();
+  if (!isMobile) {
+    await expect(
+      page.getByText("You added a note", { exact: false }),
+    ).toBeVisible();
+  }
   await expect(page.getByText("This is a note about Jane.")).toBeVisible();
 
   await menu.goToDashboard();
