@@ -41,7 +41,7 @@ const SECTIONS = [
   },
   { id: "deals", label: "resources.deals.name", fallback: "Deals" },
   { id: "notes", label: "resources.notes.name", fallback: "Notes" },
-  { id: "tasks", label: "resources.tasks.name", fallback: "Tasks" },
+  { id: "tasks", label: "resources.tasks.name", fallback: "Seguimientos" },
 ];
 
 /** Ensure every item in a { value, label } array has a value (slug from label). */

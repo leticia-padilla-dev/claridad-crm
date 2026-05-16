@@ -56,9 +56,9 @@ test.describe("user adding a task", () => {
 
     if (isMobile) {
       await page.getByRole("button", { name: "Create" }).click();
-      await page.getByRole("menuitem", { name: "Task" }).click();
+      await page.getByRole("menuitem", { name: "Seguimiento" }).click();
     } else {
-      await page.getByRole("button", { name: "Add Task" }).click();
+      await page.getByRole("button", { name: "Add seguimiento" }).click();
     }
     await page.getByLabel("Description *").fill("Follow up with Jane");
     await page.getByLabel("Due date").fill("2026-04-11T21:00");
@@ -67,30 +67,30 @@ test.describe("user adding a task", () => {
 
     await page.getByRole("button", { name: "Save" }).click();
 
-    await dismissToast("Task added");
+    await dismissToast("Seguimiento added");
 
     if (isMobile) {
-      await expect(page.getByText("1 task")).toBeVisible();
-      await page.getByText("1 task").click();
+      await expect(page.getByText("1 seguimiento")).toBeVisible();
+      await page.getByText("1 seguimiento").click();
 
       await expect(page.getByText("Follow up with Jane")).toBeVisible();
       await expect(page.getByText("due 4/11/2026, 9:00:00 PM")).toBeVisible();
     } else {
-      await expect(page.getByText("Tasks")).toBeVisible();
+      await expect(page.getByText("Seguimientos")).toBeVisible();
 
-      await expect(page.getByText("Tasks").locator("..")).toHaveText(
+      await expect(page.getByText("Seguimientos").locator("..")).toHaveText(
         /Follow up with Jane/,
       );
       await menu.goToDashboard();
 
-      await expect(page.getByText("Upcoming Tasks")).toBeVisible();
+      await expect(page.getByText("Upcoming Seguimientos")).toBeVisible();
       await expect(
-        page.getByText("Upcoming Tasks").locator("../.."),
+        page.getByText("Upcoming Seguimientos").locator("../.."),
       ).toHaveText(/Follow up with Jane/);
       await expect(
         page.getByText("Follow up with Jane").locator(".."),
       ).toHaveText(
-        "Call Follow up with Janedue 4/11/2026, 9:00:00 PM (Re: Jane Smith)",
+        "Call Follow up with Janedue 4/11/2026, 9:00:00 PM (Client: Jane Smith)",
       );
     }
   });
