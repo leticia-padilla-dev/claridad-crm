@@ -1,19 +1,48 @@
-## Problem
+## Issue
 
-_Describe the problem this PR solves_
+Closes #
 
-## Solution
+## Objetivo
 
-_Describe the solution this PR implements_
+-
 
-## How To Test
+## Cambios realizados
 
-_Describe the steps required to test the changes_
+-
 
-## Additional Checks
+## Archivos modificados
 
-- [ ] The **documentation** is up to date
-- [ ] Tested with **fakerest** provider (see [related documentation](https://github.com/marmelab/atomic-crm/blob/main/doc/developer/data-providers.md))
-- [ ] Tested with **Mobile** resolution
+-
 
-Also, please make sure to read the [contributing guidelines](https://github.com/marmelab/atomic-crm/tree/main?tab=contributing-ov-file#readme).
+## Fuera de alcance
+
+-
+
+## Validación local
+
+- [ ] `npm run build`
+- [ ] `git diff --check`
+- [ ] navegación revisada
+- [ ] auth/session revisada si aplica
+
+## Riesgos
+
+-
+
+## Capturas
+
+-
+
+## Checklist
+
+- [ ] La rama sale de `origin/main`
+- [ ] El cambio corresponde a un solo slice
+- [ ] No hay cambios fuera de alcance
+- [ ] No se ha tocado schema si no estaba previsto
+- [ ] No se han añadido features no solicitadas
+- [ ] La PR referencia el issue
+- [ ] No hacer merge hasta revisión/aprobación
+
+## Siguiente slice lógico
+
+-
