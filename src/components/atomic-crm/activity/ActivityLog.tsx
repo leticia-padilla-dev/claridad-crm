@@ -3,17 +3,20 @@ import type { Identifier } from "ra-core";
 
 import { ActivityLogContext } from "./ActivityLogContext";
 import { ActivityLogIterator } from "./ActivityLogIterator";
+import type { Activity } from "../types";
 
 type ActivityLogProps = {
   companyId?: Identifier;
   pageSize?: number;
   context?: "company" | "contact" | "deal" | "all";
+  hiddenTypes?: Activity["type"][];
 };
 
 export function ActivityLog({
   companyId,
   pageSize = 20,
   context = "all",
+  hiddenTypes,
 }: ActivityLogProps) {
   return (
     <ActivityLogContext.Provider value={context}>
@@ -24,7 +27,7 @@ export function ActivityLog({
         perPage={pageSize}
         disableSyncWithLocation
       >
-        <ActivityLogIterator />
+        <ActivityLogIterator hiddenTypes={hiddenTypes} />
       </InfiniteListBase>
     </ActivityLogContext.Provider>
   );

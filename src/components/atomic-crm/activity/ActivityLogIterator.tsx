@@ -26,12 +26,18 @@ import { ActivityLogDealNoteCreated } from "./ActivityLogDealNoteCreated";
 import { InfinitePagination } from "../misc/InfinitePagination";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-export function ActivityLogIterator() {
+export function ActivityLogIterator({
+  hiddenTypes = [],
+}: {
+  hiddenTypes?: Activity["type"][];
+}) {
   const isMobile = useIsMobile();
   const { data, isPending, error, refetch } = useListContext<Activity>();
   const { hasNextPage, fetchNextPage, isFetchingNextPage } =
     useInfinitePaginationContext();
   const translate = useTranslate();
+  const visibleActivities =
+    data?.filter((activity) => !hiddenTypes.includes(activity.type)) ?? [];
 
   if (isPending) {
     return (
@@ -50,7 +56,7 @@ export function ActivityLogIterator() {
     );
   }
 
-  if (error && !data?.length) {
+  if (error && !visibleActivities.length) {
     return (
       <div className="p-4">
         <div className="text-center text-muted-foreground mb-4">
@@ -70,10 +76,10 @@ export function ActivityLogIterator() {
 
   return (
     <div className="space-y-4">
-      {data?.map((activity, index) => (
+      {visibleActivities.map((activity, index) => (
         <Fragment key={index}>
           <ActivityItem activity={activity} />
-          {index < data.length - 1 && <Separator />}
+          {index < visibleActivities.length - 1 && <Separator />}
         </Fragment>
       ))}
 

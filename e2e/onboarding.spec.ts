@@ -5,7 +5,7 @@ test("user onboarding", async ({ page, isMobile, menu, dismissToast }) => {
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Atomic CRM/);
-  await expect(page.getByText("Welcome to Atomic CRM")).toBeVisible();
+  await expect(page.getByText("Welcome to Claridad CRM")).toBeVisible();
 
   await page.getByLabel("First name").fill("John");
   await page.getByLabel("Last name").fill("Doe");
@@ -15,11 +15,11 @@ test("user onboarding", async ({ page, isMobile, menu, dismissToast }) => {
 
   await expect(page.getByText("What's next?")).toBeVisible();
   await expect(page.getByText("1/3 done")).toBeVisible();
-  await expect(page.getByText("Install Atomic CRM")).toBeVisible();
-  await expect(page.getByText("Add your first contact")).toBeVisible();
+  await expect(page.getByText("Workspace ready")).toBeVisible();
+  await expect(page.getByText("Add your first client")).toBeVisible();
   await expect(page.getByText("Add your first note")).toBeVisible();
 
-  await page.getByText("New Contact").click();
+  await page.getByText("New Client").click();
   await page.waitForLoadState("networkidle");
   await page.getByLabel("She/Her").click();
   await page.getByLabel("First name").fill("Jane");
@@ -91,10 +91,6 @@ test("user onboarding", async ({ page, isMobile, menu, dismissToast }) => {
   await page.waitForLoadState("networkidle");
 
   await expect(page.getByText("Latest Activity")).toBeVisible();
-  await expect(
-    page.getByText("Latest Activity").locator("xpath=../.."),
-  ).toHaveText(/You added company Smith Corp today at/);
-
   await expect(
     page.getByText("Latest Activity").locator("xpath=../.."),
   ).toHaveText(/You added Jane Smith to Smith Corp today at/);
