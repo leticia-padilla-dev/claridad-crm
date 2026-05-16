@@ -208,6 +208,48 @@ export const frenchCrmMessages = {
         title: "Clients prioritaires",
       },
     },
+    appointments: {
+      name: "Rendez-vous |||| Rendez-vous",
+      forcedCaseName: "Rendez-vous",
+      fields: {
+        contact_id: "Client",
+        notes: "Notes",
+        scheduled_at: "Prévu le",
+        status: "Statut",
+        type: "Type",
+      },
+      action: {
+        add: "Ajouter un rendez-vous",
+        create: "Créer un rendez-vous",
+        edit: "Modifier le rendez-vous",
+        new: "Nouveau rendez-vous",
+        show: "Afficher le rendez-vous",
+      },
+      dialog: {
+        create: "Créer un rendez-vous",
+        create_for: "Créer un rendez-vous pour %{name}",
+      },
+      added: "Rendez-vous ajouté",
+      updated: "Rendez-vous mis à jour",
+      deleted: "Rendez-vous supprimé",
+      empty: "Aucun rendez-vous pour le moment",
+      regarding_contact: "(Client : %{name})",
+      inputs: {
+        statuses: {
+          pending: "En attente",
+          confirmed: "Confirmé",
+          completed: "Terminé",
+          cancelled: "Annulé",
+        },
+        types: {
+          consultation: "Consultation",
+          delivery: "Livraison",
+          demonstration: "Démonstration",
+          follow_up: "Suivi",
+          video_call: "Appel vidéo",
+        },
+      },
+    },
     deals: {
       name: "Affaire |||| Affaires",
       fields: {

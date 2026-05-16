@@ -6,6 +6,8 @@ import { ShowButton } from "@/components/admin/show-button";
 
 import { AddTask } from "../tasks/AddTask";
 import { TasksIterator } from "../tasks/TasksIterator";
+import { AddAppointment } from "../appointments/AddAppointment";
+import { AppointmentsIterator } from "../appointments/AppointmentsIterator";
 import { TagsListEdit } from "./TagsListEdit";
 import { ContactStatusSelector } from "./ContactInputs";
 import { ContactPersonalInfo } from "./ContactPersonalInfo";
@@ -58,6 +60,20 @@ export const ContactAside = ({ link = "edit" }: { link?: "edit" | "show" }) => {
         title={translate("resources.tags.name", { smart_count: 2 })}
       >
         <TagsListEdit />
+      </AsideSection>
+
+      <AsideSection
+        title={translate("resources.appointments.name", { smart_count: 2 })}
+      >
+        <ReferenceManyField
+          target="contact_id"
+          reference="appointments"
+          sort={{ field: "scheduled_at", order: "ASC" }}
+          perPage={1000}
+        >
+          <AppointmentsIterator />
+        </ReferenceManyField>
+        <AddAppointment />
       </AsideSection>
 
       <AsideSection

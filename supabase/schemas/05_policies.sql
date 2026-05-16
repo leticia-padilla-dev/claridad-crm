@@ -12,6 +12,7 @@ alter table public.deal_notes enable row level security;
 alter table public.sales enable row level security;
 alter table public.tags enable row level security;
 alter table public.tasks enable row level security;
+alter table public.appointments enable row level security;
 alter table public.configuration enable row level security;
 alter table public.favicons_excluded_domains enable row level security;
 
@@ -59,6 +60,12 @@ create policy "Enable read access for authenticated users" on public.tasks for s
 create policy "Enable insert for authenticated users only" on public.tasks for insert to authenticated with check (true);
 create policy "Task Update Policy" on public.tasks for update to authenticated using (true);
 create policy "Task Delete Policy" on public.tasks for delete to authenticated using (true);
+
+-- Appointments
+create policy "Enable read access for authenticated users" on public.appointments for select to authenticated using (true);
+create policy "Enable insert for authenticated users only" on public.appointments for insert to authenticated with check (true);
+create policy "Appointment Update Policy" on public.appointments for update to authenticated using (true);
+create policy "Appointment Delete Policy" on public.appointments for delete to authenticated using (true);
 
 -- Configuration (admin-only for writes)
 create policy "Enable read for authenticated" on public.configuration for select to authenticated using (true);

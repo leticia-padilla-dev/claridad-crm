@@ -1,6 +1,14 @@
-import { FileText, Import, Settings, User, Users } from "lucide-react";
+import {
+  CalendarDays,
+  FileText,
+  Import,
+  Settings,
+  User,
+  Users,
+} from "lucide-react";
 import { CanAccess, useTranslate, useUserMenu } from "ra-core";
 import { Link, matchPath, useLocation } from "react-router";
+import type { ReactNode } from "react";
 import { RefreshButton } from "@/components/admin/refresh-button";
 import { ThemeModeToggle } from "@/components/admin/theme-mode-toggle";
 import { UserMenu } from "@/components/admin/user-menu";
@@ -20,6 +28,8 @@ const Header = () => {
     currentPath = "/";
   } else if (matchPath("/contacts/*", location.pathname)) {
     currentPath = "/contacts";
+  } else if (matchPath("/appointments/*", location.pathname)) {
+    currentPath = "/appointments";
   } else if (matchPath("/companies/*", location.pathname)) {
     currentPath = "/companies";
   } else if (matchPath("/deals/*", location.pathname)) {
@@ -64,6 +74,14 @@ const Header = () => {
                     to="/contacts"
                     isActive={currentPath === "/contacts"}
                   />
+                  <NavigationTab
+                    label={translate("resources.appointments.name", {
+                      smart_count: 2,
+                    })}
+                    to="/appointments"
+                    isActive={currentPath === "/appointments"}
+                    icon={<CalendarDays className="size-4" />}
+                  />
                 </nav>
               </div>
               <div className="flex items-center">
@@ -93,10 +111,12 @@ const NavigationTab = ({
   label,
   to,
   isActive,
+  icon,
 }: {
   label: string;
   to: string;
   isActive: boolean;
+  icon?: ReactNode;
 }) => (
   <Link
     to={to}
@@ -106,6 +126,9 @@ const NavigationTab = ({
         : "text-secondary-foreground/70 border-transparent hover:text-secondary-foreground/80"
     }`}
   >
+    {icon ? (
+      <span className="inline-flex mr-2 align-middle">{icon}</span>
+    ) : null}
     {label}
   </Link>
 );

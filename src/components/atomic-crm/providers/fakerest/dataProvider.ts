@@ -9,6 +9,7 @@ import {
 import fakeRestDataProvider from "ra-data-fakerest";
 
 import type {
+  Appointment,
   Company,
   Contact,
   ContactNote,
@@ -464,6 +465,27 @@ export const createDataProvider = ({
           return result;
         },
       } satisfies ResourceCallbacks<Contact>,
+      {
+        resource: "appointments",
+        beforeCreate: async (params) => {
+          const now = new Date().toISOString();
+          return {
+            ...params,
+            data: {
+              created_at: now,
+              updated_at: now,
+              ...params.data,
+            },
+          };
+        },
+        beforeUpdate: async (params) => ({
+          ...params,
+          data: {
+            ...params.data,
+            updated_at: new Date().toISOString(),
+          },
+        }),
+      } satisfies ResourceCallbacks<Appointment>,
       {
         resource: "tasks",
         afterCreate: async (result, dataProvider) => {

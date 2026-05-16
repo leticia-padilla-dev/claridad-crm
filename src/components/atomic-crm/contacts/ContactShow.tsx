@@ -29,6 +29,7 @@ import { ContactPersonalInfo } from "./ContactPersonalInfo";
 import { ContactProfileInfo } from "./ContactProfileInfo";
 import { ContactBackgroundInfo } from "./ContactBackgroundInfo";
 import { ContactTasksList } from "./ContactTasksList";
+import { ContactAppointmentsList } from "./ContactAppointmentsList";
 import type { Contact } from "../types";
 import { Avatar } from "./Avatar";
 import { ContactAside } from "./ContactAside";
@@ -135,9 +136,12 @@ const ContactShowContentMobile = () => {
         </div>
 
         <Tabs defaultValue="notes" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 h-10">
+          <TabsList className="grid w-full grid-cols-4 h-10">
             <TabsTrigger value="notes">
               {translate("resources.notes.name", { smart_count: 2 })}
+            </TabsTrigger>
+            <TabsTrigger value="appointments">
+              {translate("resources.appointments.name", { smart_count: 2 })}
             </TabsTrigger>
             <TabsTrigger value="tasks">
               {translate("crm.common.task_count", {
@@ -184,6 +188,10 @@ const ContactShowContentMobile = () => {
 
           <TabsContent value="tasks" className="mt-4">
             <ContactTasksList />
+          </TabsContent>
+
+          <TabsContent value="appointments" className="mt-4">
+            <ContactAppointmentsList />
           </TabsContent>
 
           <TabsContent value="details" className="mt-4">

@@ -40,6 +40,7 @@ const baseSale: Sale = {
 // that matter for each scenario.
 export const createCrmDb = (overrides: Partial<Db> = {}): Db =>
   ({
+    appointments: [],
     companies: [],
     configuration: [{ config: {}, id: 1 }],
     contact_notes: [],
