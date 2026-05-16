@@ -66,10 +66,12 @@ describe("TaskCreateSheet", () => {
 
     await screen.getByRole("button", { name: /^save$/i }).click();
 
-    await expect.element(screen.getByText("Task added")).toBeInTheDocument();
+    await expect
+      .element(screen.getByText("Seguimiento added"))
+      .toBeInTheDocument();
 
     await expect
-      .element(screen.getByText("Create Task"))
+      .element(screen.getByText("Create seguimiento"))
       .not.toBeInTheDocument();
 
     await expect

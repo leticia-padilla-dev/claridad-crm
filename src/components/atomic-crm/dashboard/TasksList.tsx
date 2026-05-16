@@ -15,7 +15,7 @@ export const TasksList = () => {
         </div>
         <h2 className="text-xl font-semibold text-muted-foreground flex-1">
           {translate("crm.dashboard.upcoming_tasks", {
-            _: "Upcoming Tasks",
+            _: "Upcoming Seguimientos",
           })}
         </h2>
         <AddTask display="icon" selectContact />
