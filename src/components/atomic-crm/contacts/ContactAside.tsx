@@ -9,6 +9,7 @@ import { TasksIterator } from "../tasks/TasksIterator";
 import { TagsListEdit } from "./TagsListEdit";
 import { ContactStatusSelector } from "./ContactInputs";
 import { ContactPersonalInfo } from "./ContactPersonalInfo";
+import { ContactProfileInfo } from "./ContactProfileInfo";
 import { ContactBackgroundInfo } from "./ContactBackgroundInfo";
 import { AsideSection } from "../misc/AsideSection";
 import type { Contact } from "../types";
@@ -31,7 +32,7 @@ export const ContactAside = ({ link = "edit" }: { link?: "edit" | "show" }) => {
         )}
       </div>
 
-      <AsideSection title={translate("resources.notes.fields.status")}>
+      <AsideSection title={translate("resources.contacts.fields.status")}>
         <ContactStatusSelector />
       </AsideSection>
 
@@ -39,6 +40,12 @@ export const ContactAside = ({ link = "edit" }: { link?: "edit" | "show" }) => {
         title={translate("resources.contacts.field_categories.personal_info")}
       >
         <ContactPersonalInfo />
+      </AsideSection>
+
+      <AsideSection
+        title={translate("resources.contacts.field_categories.profile")}
+      >
+        <ContactProfileInfo />
       </AsideSection>
 
       <AsideSection

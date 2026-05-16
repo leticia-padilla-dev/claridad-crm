@@ -10,7 +10,9 @@ import type { FocusEvent, ClipboardEventHandler } from "react";
 import { useFormContext } from "react-hook-form";
 import { Separator } from "@/components/ui/separator";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { AutocompleteArrayInput } from "@/components/admin/autocomplete-array-input";
 import { BooleanInput } from "@/components/admin/boolean-input";
+import { DateInput } from "@/components/admin/date-input";
 import { ReferenceInput } from "@/components/admin/reference-input";
 import { TextInput } from "@/components/admin/text-input";
 import { RadioButtonGroupInput } from "@/components/admin/radio-button-group-input";
@@ -24,10 +26,13 @@ import type { Sale, Contact } from "../types";
 import { Avatar } from "./Avatar";
 import { AutocompleteCompanyInput } from "../companies/AutocompleteCompanyInput.tsx";
 import {
+  contactBusinessLines,
   contactGender,
+  translateContactBusinessLineLabel,
   translateContactGenderLabel,
   translatePersonalInfoTypeLabel,
 } from "./contactModel.ts";
+import { useConfigurationContext } from "../root/ConfigurationContext.tsx";
 
 export const ContactInputs = () => {
   const isMobile = useIsMobile();
@@ -47,6 +52,7 @@ export const ContactInputs = () => {
         )}
         <div className="flex flex-col gap-10 flex-1">
           <ContactPersonalInformationInputs />
+          <ContactProfileInputs />
           <ContactMiscInputs />
         </div>
       </div>
@@ -195,11 +201,48 @@ const ContactPersonalInformationInputs = () => {
           />
         </SimpleFormIterator>
       </ArrayInput>
+      <TextInput source="whatsapp" helperText={false} />
+      <TextInput source="city" helperText={false} />
+      <DateInput source="birthday" helperText={false} />
       <TextInput
         source="linkedin_url"
         helperText={false}
         validate={isLinkedinUrl}
       />
+    </div>
+  );
+};
+
+const ContactProfileInputs = () => {
+  const translate = useTranslate();
+  const { noteStatuses } = useConfigurationContext();
+  const businessLineChoices = contactBusinessLines.map((choice) => ({
+    id: choice.value,
+    name: translateContactBusinessLineLabel(choice, translate),
+  }));
+
+  return (
+    <div className="flex flex-col gap-4">
+      <h6 className="text-lg font-semibold">
+        {translate("resources.contacts.field_categories.profile")}
+      </h6>
+      <SelectInput
+        source="status"
+        helperText={false}
+        label="resources.contacts.fields.status"
+        choices={noteStatuses.map((statusOption) => ({
+          id: statusOption.value,
+          name: statusOption.label,
+        }))}
+      />
+      <AutocompleteArrayInput
+        source="business_lines_interest"
+        label="resources.contacts.fields.business_lines_interest"
+        helperText={false}
+        choices={businessLineChoices}
+      />
+      <TextInput source="preferences" multiline helperText={false} />
+      <TextInput source="allergies_or_needs" multiline helperText={false} />
     </div>
   );
 };

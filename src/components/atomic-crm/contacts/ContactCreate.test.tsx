@@ -126,4 +126,49 @@ describe("ContactCreate", () => {
       }),
     );
   });
+
+  it("submits cliente core profile fields", async () => {
+    const createMock = vi.fn().mockResolvedValue({ data: {} });
+
+    const screen = await render(
+      <ContactCreateBasic
+        silent
+        dataProvider={{
+          create: createMock,
+        }}
+      />,
+    );
+
+    await screen.getByLabelText(/first name/i).fill("Ada");
+    await screen.getByLabelText(/last name/i).fill("Lovelace");
+    await screen.getByLabelText(/whatsapp/i).fill("+34123456789");
+    await screen.getByLabelText(/^city$/i).fill("Madrid");
+    await screen.getByLabelText(/birthday/i).fill("1990-03-08");
+    await screen.getByLabelText(/preferences/i).fill("Prefers skincare sets");
+    await screen.getByLabelText(/allergies or needs/i).fill("Sensitive skin");
+    await expect
+      .element(screen.getByText("Business lines"))
+      .toBeInTheDocument();
+
+    await screen.getByRole("combobox", { name: /client status/i }).click();
+    await screen.getByRole("option", { name: "Hot" }).click();
+
+    await screen.getByRole("button", { name: /^save$/i }).click();
+
+    await expect.poll(() => createMock).toBeCalledTimes(1);
+
+    expect(createMock).toBeCalledWith(
+      expect.anything(),
+      expect.objectContaining({
+        data: expect.objectContaining({
+          whatsapp: "+34123456789",
+          city: "Madrid",
+          birthday: "1990-03-08",
+          preferences: "Prefers skincare sets",
+          allergies_or_needs: "Sensitive skin",
+          status: "hot",
+        }),
+      }),
+    );
+  });
 });

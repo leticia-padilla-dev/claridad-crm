@@ -1,19 +1,44 @@
 import { Mars, NonBinary, Venus } from "lucide-react";
 
-import type { Company, Contact, ContactGender } from "../types";
+import type {
+  Company,
+  Contact,
+  ContactBusinessLineChoice,
+  ContactBusinessLineValue,
+  ContactGender,
+} from "../types";
 
 export const defaultEmailJsonb = [{ email: null, type: null }];
 export const defaultPhoneJsonb = [{ number: null, type: null }];
+export const defaultBusinessLinesInterest: ContactBusinessLineValue[] = [];
 
 const cleanContactArrayFields = (data: Contact) => {
   const cleanedEmailJsonb =
     data.email_jsonb?.filter((e) => e.email != null) || [];
   const cleanedPhoneJsonb =
     data.phone_jsonb?.filter((p) => p.number != null) || [];
+  const cleanedBusinessLinesInterest =
+    data.business_lines_interest?.filter((value) => value != null) || [];
+
+  const normalizeOptionalText = (value?: string | null) => {
+    if (value == null) return null;
+    const trimmed = value.trim();
+    return trimmed.length > 0 ? trimmed : null;
+  };
+
   return {
     ...data,
     phone_jsonb: cleanedPhoneJsonb.length > 0 ? cleanedPhoneJsonb : null,
     email_jsonb: cleanedEmailJsonb.length > 0 ? cleanedEmailJsonb : null,
+    whatsapp: normalizeOptionalText(data.whatsapp),
+    city: normalizeOptionalText(data.city),
+    birthday: data.birthday || null,
+    preferences: normalizeOptionalText(data.preferences),
+    allergies_or_needs: normalizeOptionalText(data.allergies_or_needs),
+    business_lines_interest:
+      cleanedBusinessLinesInterest.length > 0
+        ? cleanedBusinessLinesInterest
+        : null,
   };
 };
 
@@ -42,6 +67,12 @@ const personalInfoTypeMap: Record<string, string> = {
   Other: "other",
 };
 
+const businessLineDefaultLabels: Record<ContactBusinessLineValue, string> = {
+  "mary-kay": "Mary Kay",
+  "beyond-beauty": "Beyond Beauty",
+  incruises: "In Cruises",
+};
+
 export const contactGender: ContactGender[] = [
   {
     value: "male",
@@ -57,6 +88,21 @@ export const contactGender: ContactGender[] = [
     value: "nonbinary",
     label: "resources.contacts.inputs.genders.nonbinary",
     icon: NonBinary,
+  },
+];
+
+export const contactBusinessLines: ContactBusinessLineChoice[] = [
+  {
+    value: "mary-kay",
+    label: "resources.contacts.inputs.business_lines.mary_kay",
+  },
+  {
+    value: "beyond-beauty",
+    label: "resources.contacts.inputs.business_lines.beyond_beauty",
+  },
+  {
+    value: "incruises",
+    label: "resources.contacts.inputs.business_lines.incruises",
   },
 ];
 
@@ -78,6 +124,17 @@ export const translatePersonalInfoTypeLabel = (
       _: type,
     },
   );
+
+export const translateContactBusinessLineLabel = (
+  businessLine: ContactBusinessLineChoice | { value: string; label?: string },
+  translate: TranslateFn,
+) =>
+  translate(businessLine.label ?? businessLine.value, {
+    _:
+      businessLineDefaultLabels[
+        businessLine.value as ContactBusinessLineValue
+      ] ?? businessLine.value,
+  });
 
 /**
  * Folds a long line according to vCard specification (max 75 chars per line)

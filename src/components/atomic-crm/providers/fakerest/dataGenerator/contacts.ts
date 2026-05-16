@@ -1,4 +1,5 @@
 import {
+  address,
   company as fakerCompany,
   internet,
   lorem,
@@ -79,6 +80,15 @@ export const generateContacts = (db: Db, size = 500): Required<Contact>[] => {
       last_name,
       gender,
       title: title.charAt(0).toUpperCase() + title.substr(1),
+      whatsapp: phone.phoneNumber(),
+      city: address.city(),
+      birthday: randomDate(new Date("1970-01-01T00:00:00.000Z")).toISOString(),
+      preferences: lorem.sentence(),
+      allergies_or_needs: weightedBoolean(35) ? lorem.sentence() : null,
+      business_lines_interest: random.arrayElements(
+        ["mary-kay", "beyond-beauty", "incruises"],
+        random.arrayElement([1, 1, 2]),
+      ),
       company_id: company.id,
       company_name: company.name,
       email_jsonb,

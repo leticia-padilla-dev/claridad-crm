@@ -107,6 +107,11 @@ export const mergeContacts = async (
     (phone) => phone.number,
   );
 
+  const mergedBusinessLines = mergeArraysUnique(
+    winnerContact.business_lines_interest || [],
+    loserContact.business_lines_interest || [],
+  );
+
   const winnerUpdate = dataProvider.update<Contact>("contacts", {
     id: winnerId,
     data: {
@@ -121,10 +126,19 @@ export const mergeContacts = async (
       company_id: winnerContact.company_id ?? loserContact.company_id,
       email_jsonb: mergedEmails,
       phone_jsonb: mergedPhones,
+      whatsapp: winnerContact.whatsapp || loserContact.whatsapp,
+      city: winnerContact.city || loserContact.city,
+      birthday: winnerContact.birthday || loserContact.birthday,
+      preferences: winnerContact.preferences || loserContact.preferences,
+      allergies_or_needs:
+        winnerContact.allergies_or_needs || loserContact.allergies_or_needs,
+      business_lines_interest:
+        mergedBusinessLines.length > 0 ? mergedBusinessLines : null,
       linkedin_url: winnerContact.linkedin_url || loserContact.linkedin_url,
       background: winnerContact.background ?? loserContact.background,
       has_newsletter:
         winnerContact.has_newsletter ?? loserContact.has_newsletter,
+      status: winnerContact.status ?? loserContact.status,
       first_seen: winnerContact.first_seen ?? loserContact.first_seen,
       last_seen:
         winnerContact.last_seen > loserContact.last_seen

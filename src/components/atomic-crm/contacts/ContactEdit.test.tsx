@@ -145,6 +145,35 @@ describe("ContactEdit", () => {
         }),
       );
     });
+
+    it("shows cliente core profile fields on edit", async () => {
+      const screen = await render(<ContactEditBasic silent />);
+
+      await expect
+        .element(screen.getByPlaceholder("Email"))
+        .toBeInTheDocument();
+      await expect
+        .element(screen.getByLabelText(/whatsapp/i))
+        .toBeInTheDocument();
+      await expect
+        .element(screen.getByLabelText(/^city$/i))
+        .toBeInTheDocument();
+      await expect
+        .element(screen.getByLabelText(/birthday/i))
+        .toBeInTheDocument();
+      await expect
+        .element(screen.getByLabelText(/preferences/i))
+        .toBeInTheDocument();
+      await expect
+        .element(screen.getByLabelText(/allergies or needs/i))
+        .toBeInTheDocument();
+      await expect
+        .element(screen.getByText("Business lines"))
+        .toBeInTheDocument();
+      await expect
+        .element(screen.getByRole("combobox", { name: /client status/i }))
+        .toBeInTheDocument();
+    });
   });
   describe("mobile", () => {
     beforeAll(() => {
