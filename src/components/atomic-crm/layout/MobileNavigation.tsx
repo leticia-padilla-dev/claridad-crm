@@ -6,13 +6,21 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { Home, ListTodo, Plus, Settings, Users } from "lucide-react";
+import {
+  CalendarDays,
+  Home,
+  ListTodo,
+  Plus,
+  Settings,
+  Users,
+} from "lucide-react";
 import { useTranslate } from "ra-core";
 import { Link, matchPath, useLocation, useMatch } from "react-router";
 import { ContactCreateSheet } from "../contacts/ContactCreateSheet";
 import { useState } from "react";
 import { NoteCreateSheet } from "../notes/NoteCreateSheet";
 import { TaskCreateSheet } from "../tasks/TaskCreateSheet";
+import { AppointmentCreateSheet } from "../appointments/AppointmentCreateSheet";
 
 export const MobileNavigation = () => {
   const location = useLocation();
@@ -23,6 +31,8 @@ export const MobileNavigation = () => {
     currentPath = "/";
   } else if (matchPath("/contacts/*", location.pathname)) {
     currentPath = "/contacts";
+  } else if (matchPath("/appointments/*", location.pathname)) {
+    currentPath = "/appointments";
   } else if (matchPath("/companies/*", location.pathname)) {
     currentPath = "/companies";
   } else if (matchPath("/tasks/*", location.pathname)) {
@@ -68,6 +78,14 @@ export const MobileNavigation = () => {
             })}
             isActive={currentPath === "/contacts"}
           />
+          <NavigationButton
+            href="/appointments"
+            Icon={CalendarDays}
+            label={translate("resources.appointments.name", {
+              smart_count: 2,
+            })}
+            isActive={currentPath === "/appointments"}
+          />
           <CreateButton />
           <NavigationButton
             href="/tasks"
@@ -98,6 +116,7 @@ const NavigationButton = ({
     variant="ghost"
     className={cn(
       "flex-col gap-1 h-auto py-2 px-1 rounded-md w-16",
+      "w-14 sm:w-16",
       isActive ? null : "text-muted-foreground",
     )}
   >
@@ -112,6 +131,7 @@ const CreateButton = () => {
   const translate = useTranslate();
   const contact_id = useMatch("/contacts/:id/*")?.params.id;
   const [contactCreateOpen, setContactCreateOpen] = useState(false);
+  const [appointmentCreateOpen, setAppointmentCreateOpen] = useState(false);
   const [noteCreateOpen, setNoteCreateOpen] = useState(false);
   const [taskCreateOpen, setTaskCreateOpen] = useState(false);
 
@@ -120,6 +140,11 @@ const CreateButton = () => {
       <ContactCreateSheet
         open={contactCreateOpen}
         onOpenChange={setContactCreateOpen}
+      />
+      <AppointmentCreateSheet
+        open={appointmentCreateOpen}
+        onOpenChange={setAppointmentCreateOpen}
+        contact_id={contact_id}
       />
       <NoteCreateSheet
         open={noteCreateOpen}
@@ -150,6 +175,14 @@ const CreateButton = () => {
             }}
           >
             {translate("resources.contacts.forcedCaseName")}
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            className="h-12 px-4 text-base"
+            onSelect={() => {
+              setAppointmentCreateOpen(true);
+            }}
+          >
+            {translate("resources.appointments.forcedCaseName")}
           </DropdownMenuItem>
           <DropdownMenuItem
             className="h-12 px-4 text-base"

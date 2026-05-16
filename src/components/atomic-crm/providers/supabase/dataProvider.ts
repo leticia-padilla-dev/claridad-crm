@@ -7,6 +7,7 @@ import {
   type ResourceCallbacks,
 } from "ra-core";
 import type {
+  Appointment,
   ContactNote,
   Deal,
   DealNote,
@@ -258,6 +259,27 @@ const processConfigLogo = async (logo: any): Promise<string> => {
 };
 
 const lifeCycleCallbacks: ResourceCallbacks[] = [
+  {
+    resource: "appointments",
+    beforeCreate: async (params) => {
+      const now = new Date().toISOString();
+      return {
+        ...params,
+        data: {
+          created_at: now,
+          updated_at: now,
+          ...params.data,
+        },
+      };
+    },
+    beforeUpdate: async (params) => ({
+      ...params,
+      data: {
+        ...params.data,
+        updated_at: new Date().toISOString(),
+      },
+    }),
+  } satisfies ResourceCallbacks<Appointment>,
   {
     resource: "configuration",
     beforeUpdate: async (params) => {

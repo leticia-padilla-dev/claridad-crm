@@ -1,3 +1,4 @@
+import { generateAppointments } from "./appointments";
 import { generateCompanies } from "./companies";
 import { generateContactNotes } from "./contactNotes";
 import { generateContacts } from "./contacts";
@@ -15,6 +16,7 @@ export default (): Db => {
   db.tags = generateTags(db);
   db.companies = generateCompanies(db);
   db.contacts = generateContacts(db);
+  db.appointments = generateAppointments(db);
   db.contact_notes = generateContactNotes(db);
   db.deals = generateDeals(db);
   db.deal_notes = generateDealNotes(db);

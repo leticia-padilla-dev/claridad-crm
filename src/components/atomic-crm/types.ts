@@ -164,6 +164,16 @@ export type Task = {
   sales_id?: Identifier;
 } & Pick<RaRecord, "id">;
 
+export type Appointment = {
+  contact_id: Identifier;
+  type: string;
+  status: string;
+  scheduled_at: string;
+  notes?: string | null;
+  created_at?: string;
+  updated_at?: string;
+} & Pick<RaRecord, "id">;
+
 export type ActivityCompanyCreated = {
   type: typeof COMPANY_CREATED;
   company_id: Identifier;

@@ -203,6 +203,48 @@ export const englishCrmMessages = {
         title: "Priority Clients",
       },
     },
+    appointments: {
+      name: "Appointment |||| Appointments",
+      forcedCaseName: "Appointment",
+      fields: {
+        contact_id: "Client",
+        notes: "Notes",
+        scheduled_at: "Scheduled at",
+        status: "Status",
+        type: "Type",
+      },
+      action: {
+        add: "Add appointment",
+        create: "Create appointment",
+        edit: "Edit appointment",
+        new: "New Appointment",
+        show: "Show appointment",
+      },
+      dialog: {
+        create: "Create appointment",
+        create_for: "Create appointment for %{name}",
+      },
+      added: "Appointment added",
+      updated: "Appointment updated",
+      deleted: "Appointment deleted",
+      empty: "No appointments yet",
+      regarding_contact: "(Client: %{name})",
+      inputs: {
+        statuses: {
+          pending: "Pending",
+          confirmed: "Confirmed",
+          completed: "Completed",
+          cancelled: "Cancelled",
+        },
+        types: {
+          consultation: "Consultation",
+          delivery: "Delivery",
+          demonstration: "Demonstration",
+          follow_up: "Follow-up",
+          video_call: "Video call",
+        },
+      },
+    },
     deals: {
       name: "Deal |||| Deals",
       fields: {
