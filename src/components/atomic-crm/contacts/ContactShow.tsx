@@ -26,6 +26,7 @@ import { TagsListEdit } from "./TagsListEdit";
 import { ContactEditSheet } from "./ContactEditSheet";
 import { ContactStatusSelector } from "./ContactInputs";
 import { ContactPersonalInfo } from "./ContactPersonalInfo";
+import { ContactProfileInfo } from "./ContactProfileInfo";
 import { ContactBackgroundInfo } from "./ContactBackgroundInfo";
 import { ContactTasksList } from "./ContactTasksList";
 import type { Contact } from "../types";
@@ -189,7 +190,7 @@ const ContactShowContentMobile = () => {
             <div className="space-y-6">
               <div>
                 <h3 className="text-lg font-semibold">
-                  {translate("resources.notes.fields.status")}
+                  {translate("resources.contacts.fields.status")}
                 </h3>
                 <Separator />
                 <div className="mt-3">
@@ -205,6 +206,15 @@ const ContactShowContentMobile = () => {
                 <Separator />
                 <div className="mt-3">
                   <ContactPersonalInfo />
+                </div>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold">
+                  {translate("resources.contacts.field_categories.profile")}
+                </h3>
+                <Separator />
+                <div className="mt-3">
+                  <ContactProfileInfo />
                 </div>
               </div>
               <div>

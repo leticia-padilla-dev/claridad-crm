@@ -284,6 +284,7 @@ DECLARE
   merged_emails jsonb;
   merged_phones jsonb;
   merged_tags bigint[];
+  merged_business_lines_interest text[];
   winner_emails jsonb;
   loser_emails jsonb;
   winner_phones jsonb;
@@ -399,6 +400,13 @@ BEGIN
     )
   );
 
+  merged_business_lines_interest := ARRAY(
+    SELECT DISTINCT unnest(
+      COALESCE(winner_contact.business_lines_interest, ARRAY[]::text[]) ||
+      COALESCE(loser_contact.business_lines_interest, ARRAY[]::text[])
+    )
+  );
+
   -- 5. Update winner with merged data
   UPDATE contacts SET
     avatar = COALESCE(winner_contact.avatar, loser_contact.avatar),
@@ -409,9 +417,19 @@ BEGIN
     company_id = COALESCE(winner_contact.company_id, loser_contact.company_id),
     email_jsonb = merged_emails,
     phone_jsonb = merged_phones,
+    whatsapp = COALESCE(NULLIF(winner_contact.whatsapp, ''), loser_contact.whatsapp),
+    city = COALESCE(NULLIF(winner_contact.city, ''), loser_contact.city),
+    birthday = COALESCE(winner_contact.birthday, loser_contact.birthday),
+    preferences = COALESCE(NULLIF(winner_contact.preferences, ''), loser_contact.preferences),
+    allergies_or_needs = COALESCE(NULLIF(winner_contact.allergies_or_needs, ''), loser_contact.allergies_or_needs),
+    business_lines_interest = CASE
+      WHEN array_length(merged_business_lines_interest, 1) > 0 THEN merged_business_lines_interest
+      ELSE NULL
+    END,
     linkedin_url = COALESCE(winner_contact.linkedin_url, loser_contact.linkedin_url),
     background = COALESCE(winner_contact.background, loser_contact.background),
     has_newsletter = COALESCE(winner_contact.has_newsletter, loser_contact.has_newsletter),
+    status = COALESCE(winner_contact.status, loser_contact.status),
     first_seen = LEAST(COALESCE(winner_contact.first_seen, loser_contact.first_seen), COALESCE(loser_contact.first_seen, winner_contact.first_seen)),
     last_seen = GREATEST(COALESCE(winner_contact.last_seen, loser_contact.last_seen), COALESCE(loser_contact.last_seen, winner_contact.last_seen)),
     sales_id = COALESCE(winner_contact.sales_id, loser_contact.sales_id),

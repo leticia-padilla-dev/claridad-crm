@@ -5,6 +5,7 @@ import { ContactInputs } from "./ContactInputs";
 import { FormToolbar } from "../layout/FormToolbar";
 import {
   cleanupContactForCreate,
+  defaultBusinessLinesInterest,
   defaultEmailJsonb,
   defaultPhoneJsonb,
 } from "./contactModel";
@@ -26,6 +27,7 @@ export const ContactCreate = ({
         <div className="flex-1">
           <Form
             defaultValues={{
+              business_lines_interest: defaultBusinessLinesInterest,
               sales_id: identity?.id,
               email_jsonb: defaultEmailJsonb,
               phone_jsonb: defaultPhoneJsonb,

@@ -65,8 +65,8 @@ export const StatusSelector = ({
           disabled={disabled}
           value={status || ""}
           onChange={(e) => setStatus(e.target.value)}
-          aria-label={translate("resources.notes.fields.status", {
-            _: "Status",
+          aria-label={translate("resources.contacts.fields.status", {
+            _: "Client status",
           })}
           className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
         >

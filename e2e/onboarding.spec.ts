@@ -26,8 +26,8 @@ test("user onboarding", async ({ page, isMobile, menu, dismissToast }) => {
   await page.getByLabel("Last name").fill("Smith");
   await page.getByLabel("Title").fill("CEO");
   await page.getByLabel("Company").click();
-  await page.getByPlaceholder("Search").fill("Smith Corp");
-  await page.getByText("Create Smith Corp").click();
+  await page.getByRole("dialog").last().getByRole("combobox").fill("Smith Corp");
+  await page.getByRole("option", { name: "Create Smith Corp" }).click();
   await page
     .getByRole("group", { name: "Email addresses" })
     .getByRole("textbox", { name: "Email" })

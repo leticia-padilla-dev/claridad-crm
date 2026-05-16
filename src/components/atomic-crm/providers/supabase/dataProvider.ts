@@ -306,10 +306,14 @@ const lifeCycleCallbacks: ResourceCallbacks[] = [
       return applyFullTextSearch([
         "first_name",
         "last_name",
+        "whatsapp",
+        "city",
         "company_name",
         "title",
         "email",
         "phone",
+        "preferences",
+        "allergies_or_needs",
         "background",
       ])(params);
     },

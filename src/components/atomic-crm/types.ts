@@ -81,6 +81,11 @@ export type PhoneNumberAndType = {
   type: "Work" | "Home" | "Other";
 };
 
+export type ContactBusinessLineValue =
+  | "mary-kay"
+  | "beyond-beauty"
+  | "incruises";
+
 export type Contact = {
   first_name: string;
   last_name: string;
@@ -98,6 +103,12 @@ export type Contact = {
   status: string;
   background: string;
   phone_jsonb: PhoneNumberAndType[];
+  whatsapp?: string | null;
+  city?: string | null;
+  birthday?: string | null;
+  preferences?: string | null;
+  allergies_or_needs?: string | null;
+  business_lines_interest?: ContactBusinessLineValue[] | null;
   nb_tasks?: number;
   company_name?: string;
 } & Pick<RaRecord, "id">;
@@ -225,4 +236,9 @@ export interface ContactGender {
   value: string;
   label: string;
   icon: ComponentType<{ className?: string }>;
+}
+
+export interface ContactBusinessLineChoice {
+  value: ContactBusinessLineValue;
+  label: string;
 }
