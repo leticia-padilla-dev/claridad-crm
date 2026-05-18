@@ -587,6 +587,43 @@ export const frenchCrmMessages = {
     navigation: {
       label: "Navigation CRM",
     },
+    today: {
+      title: "Aujourd'hui",
+      kicker: "Accueil opérationnel",
+      description:
+        "Ceci devient l'espace de travail quotidien de Claridad. Les widgets réels arriveront dans les prochains slices.",
+      greeting_with_name: "%{greeting}, %{name}",
+      greetings: {
+        morning: "Bonjour",
+        afternoon: "Bon après-midi",
+        evening: "Bonsoir",
+      },
+      shell_state: "État du shell",
+      shell_state_value: "Données en préparation",
+      sections_overview: "Sections de l'écran Aujourd'hui",
+      section_error:
+        "Cette section n'a pas pu s'afficher. Le shell reste disponible pendant que les widgets de données sont en cours de construction.",
+      sections: {
+        tasks: {
+          description:
+            "Les suivis en retard et prioritaires apparaîtront ici une fois la vraie requête branchée.",
+        },
+        birthdays: {
+          title: "Anniversaires",
+          description:
+            "Les anniversaires à venir et moments client apparaîtront ici pour préparer les prises de contact.",
+        },
+        appointments: {
+          description:
+            "Les rendez-vous du jour et leurs points d'entrée rapides vivront ici.",
+        },
+        touch_this_week: {
+          title: "À toucher cette semaine",
+          description:
+            "Les clients à relancer cette semaine seront regroupés ici comme une file opérationnelle simple.",
+        },
+      },
+    },
     profile: {
       inbound: {
         description:

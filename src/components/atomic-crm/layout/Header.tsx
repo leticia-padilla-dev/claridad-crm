@@ -23,9 +23,12 @@ const Header = () => {
   const location = useLocation();
   const translate = useTranslate();
 
-  let currentPath: string | boolean = "/";
-  if (matchPath("/", location.pathname)) {
-    currentPath = "/";
+  let currentPath: string | boolean = "/today";
+  if (
+    matchPath("/today", location.pathname) ||
+    matchPath("/", location.pathname)
+  ) {
+    currentPath = "/today";
   } else if (matchPath("/contacts/*", location.pathname)) {
     currentPath = "/contacts";
   } else if (matchPath("/appointments/*", location.pathname)) {
@@ -45,7 +48,7 @@ const Header = () => {
           <div className="px-4">
             <div className="flex justify-between items-center flex-1">
               <Link
-                to="/"
+                to="/today"
                 className="flex items-center gap-2 text-secondary-foreground no-underline"
               >
                 <img
@@ -63,9 +66,9 @@ const Header = () => {
               <div>
                 <nav className="flex">
                   <NavigationTab
-                    label={translate("ra.page.dashboard")}
-                    to="/"
-                    isActive={currentPath === "/"}
+                    label={translate("crm.today.title")}
+                    to="/today"
+                    isActive={currentPath === "/today"}
                   />
                   <NavigationTab
                     label={translate("resources.contacts.name", {

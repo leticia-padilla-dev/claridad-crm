@@ -6,7 +6,7 @@ import type {
 } from "ra-core";
 import { CustomRoutes, localStorageStore, Resource } from "ra-core";
 import { useEffect, useMemo } from "react";
-import { Route } from "react-router";
+import { Navigate, Route } from "react-router";
 import { QueryClient } from "@tanstack/react-query";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import { createAsyncStoragePersister } from "@tanstack/query-async-storage-persister";
@@ -18,8 +18,6 @@ import { OAuthConsentPage } from "@/components/supabase/oauth-consent-page";
 import companies from "../companies";
 import contacts from "../contacts";
 import appointments from "../appointments";
-import { Dashboard } from "../dashboard/Dashboard";
-import { MobileDashboard } from "../dashboard/MobileDashboard";
 import deals from "../deals";
 import { Layout } from "../layout/Layout";
 import { MobileLayout } from "../layout/MobileLayout";
@@ -60,8 +58,11 @@ import { ContactListMobile } from "../contacts/ContactList.tsx";
 import { ContactShow } from "../contacts/ContactShow.tsx";
 import { CompanyShow } from "../companies/CompanyShow.tsx";
 import { NoteShowPage } from "../notes/NoteShowPage.tsx";
+import { TodayPage } from "../today/TodayPage.tsx";
 
 const defaultStore = localStorageStore(undefined, "CRM");
+
+const TodayDashboardRedirect = () => <Navigate to={TodayPage.path} replace />;
 
 export type CRMProps = {
   dataProvider?: CrmDataProvider;
@@ -243,7 +244,7 @@ const DesktopAdmin = (
   return (
     <Admin
       layout={props.layout ?? Layout}
-      dashboard={props.dashboard ?? Dashboard}
+      dashboard={props.dashboard ?? TodayDashboardRedirect}
       {...props}
     >
       <CustomRoutes noLayout>
@@ -261,6 +262,7 @@ const DesktopAdmin = (
       </CustomRoutes>
 
       <CustomRoutes>
+        <Route path={TodayPage.path} element={<TodayPage />} />
         <Route path={ProfilePage.path} element={<ProfilePage />} />
         <Route path={SettingsPage.path} element={<SettingsPage />} />
         <Route path={ImportPage.path} element={<ImportPage />} />
@@ -308,7 +310,7 @@ const MobileAdmin = (
       <Admin
         queryClient={queryClient}
         layout={props.layout ?? MobileLayout}
-        dashboard={props.dashboard ?? MobileDashboard}
+        dashboard={props.dashboard ?? TodayDashboardRedirect}
         {...props}
       >
         <CustomRoutes noLayout>
@@ -325,6 +327,7 @@ const MobileAdmin = (
           <Route path={OAuthConsentPage.path} element={<OAuthConsentPage />} />
         </CustomRoutes>
         <CustomRoutes>
+          <Route path={TodayPage.path} element={<TodayPage />} />
           <Route
             path={SettingsPageMobile.path}
             element={<SettingsPageMobile />}

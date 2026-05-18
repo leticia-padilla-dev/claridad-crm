@@ -26,9 +26,12 @@ export const MobileNavigation = () => {
   const location = useLocation();
   const translate = useTranslate();
 
-  let currentPath: string | boolean = "/";
-  if (matchPath("/", location.pathname)) {
-    currentPath = "/";
+  let currentPath: string | boolean = "/today";
+  if (
+    matchPath("/today", location.pathname) ||
+    matchPath("/", location.pathname)
+  ) {
+    currentPath = "/today";
   } else if (matchPath("/contacts/*", location.pathname)) {
     currentPath = "/contacts";
   } else if (matchPath("/appointments/*", location.pathname)) {
@@ -65,10 +68,10 @@ export const MobileNavigation = () => {
       <div className="flex justify-center">
         <>
           <NavigationButton
-            href="/"
+            href="/today"
             Icon={Home}
-            label={translate("ra.page.dashboard")}
-            isActive={currentPath === "/"}
+            label={translate("crm.today.title")}
+            isActive={currentPath === "/today"}
           />
           <NavigationButton
             href="/contacts"
