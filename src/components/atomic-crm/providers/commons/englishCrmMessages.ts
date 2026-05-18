@@ -580,6 +580,43 @@ export const englishCrmMessages = {
     navigation: {
       label: "CRM navigation",
     },
+    today: {
+      title: "Today",
+      kicker: "Operational home",
+      description:
+        "This is the new daily workspace for Claridad. The live widgets will land here in the next slices.",
+      greeting_with_name: "%{greeting}, %{name}",
+      greetings: {
+        morning: "Good morning",
+        afternoon: "Good afternoon",
+        evening: "Good evening",
+      },
+      shell_state: "Shell state",
+      shell_state_value: "Preparing live data",
+      sections_overview: "Today screen sections",
+      section_error:
+        "This section couldn't render. The shell stays available while the data widgets are still being built.",
+      sections: {
+        tasks: {
+          description:
+            "Overdue and urgent follow-ups will appear here once the real query lands.",
+        },
+        birthdays: {
+          title: "Birthdays",
+          description:
+            "Upcoming birthdays and client moments will surface here for proactive outreach.",
+        },
+        appointments: {
+          description:
+            "Today's appointments and quick entry points will live here.",
+        },
+        touch_this_week: {
+          title: "Touch This Week",
+          description:
+            "Clients needing attention this week will be grouped here as a simple operational queue.",
+        },
+      },
+    },
     profile: {
       inbound: {
         description:

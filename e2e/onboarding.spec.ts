@@ -13,12 +13,10 @@ test("user onboarding", async ({ page, isMobile, menu, dismissToast }) => {
   await page.getByLabel("Password").fill("password");
   await page.getByRole("button", { name: "Create account" }).click();
 
-  await expect(page.getByText("What's next?")).toBeVisible();
-  await expect(page.getByText("1/3 done")).toBeVisible();
-  await expect(page.getByText("Workspace ready")).toBeVisible();
-  await expect(page.getByText("Add your first client")).toBeVisible();
-  await expect(page.getByText("Add your first note")).toBeVisible();
+  await expect(page).toHaveURL(/\/today$/);
+  await expect(page.getByText("Operational home")).toBeVisible();
 
+  await menu.goToContacts();
   await page.getByText("New Client").click();
   await page.waitForLoadState("networkidle");
   await page.getByLabel("She/Her").click();
@@ -70,38 +68,5 @@ test("user onboarding", async ({ page, isMobile, menu, dismissToast }) => {
   await expect(page.getByText("CEO at Smith Corp")).toBeVisible();
 
   await menu.goToDashboard();
-  await page.waitForLoadState("networkidle");
-
-  await expect(page.getByText("2/3 done")).toBeVisible();
-
-  await page.getByRole("button", { name: "Add note" }).click();
-
-  await page.waitForLoadState("networkidle");
-
-  await page.getByPlaceholder("Add a note").fill("This is a note about Jane.");
-  await page
-    .getByRole("button", { name: isMobile ? "Save" : "Add this note" })
-    .click();
-
-  await dismissToast("Note added");
-
-  if (!isMobile) {
-    await expect(
-      page.getByText("You added a note", { exact: false }),
-    ).toBeVisible();
-  }
-  await expect(page.getByText("This is a note about Jane.")).toBeVisible();
-
-  await menu.goToDashboard();
-
-  await page.waitForLoadState("networkidle");
-
-  await expect(page.getByText("Latest Activity")).toBeVisible();
-  await expect(
-    page.getByText("Latest Activity").locator("xpath=../.."),
-  ).toHaveText(/You added Jane Smith to Smith Corp today at/);
-
-  await expect(
-    page.getByText("Latest Activity").locator("xpath=../.."),
-  ).toHaveText(/You added a note about Jane Smith today at/);
+  await expect(page.getByText("Operational home")).toBeVisible();
 });

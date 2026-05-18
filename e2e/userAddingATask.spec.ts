@@ -46,7 +46,8 @@ test.describe("user adding a task", () => {
     await page.getByRole("button", { name: "Sign in" }).click();
 
     await expect(page).toHaveTitle(/Atomic CRM/);
-    await expect(page.getByText("Latest Activity")).toBeVisible();
+    await expect(page).toHaveURL(/\/today$/);
+    await expect(page.getByText("Operational home")).toBeVisible();
 
     await menu.goToContacts();
     await page.waitForLoadState("networkidle");
@@ -83,15 +84,9 @@ test.describe("user adding a task", () => {
       );
       await menu.goToDashboard();
 
-      await expect(page.getByText("Upcoming Seguimientos")).toBeVisible();
-      await expect(
-        page.getByText("Upcoming Seguimientos").locator("../.."),
-      ).toHaveText(/Follow up with Jane/);
-      await expect(
-        page.getByText("Follow up with Jane").locator(".."),
-      ).toHaveText(
-        "Call Follow up with Janedue 4/11/2026, 9:00:00 PM (Client: Jane Smith)",
-      );
+      await expect(page).toHaveURL(/\/today$/);
+      await expect(page.getByText("Operational home")).toBeVisible();
+      await expect(page.getByText("Seguimientos")).toBeVisible();
     }
   });
 });
