@@ -1,4 +1,42 @@
-# Atomic CRM
+# Claridad CRM
+
+> **Workspace operativo visual para negocios relacionales humanos que ya viven en WhatsApp y Google Workspace.**
+>
+> Claridad CRM no es un CRM B2B clásico. Es una capa de contexto e inteligencia operativa construida sobre [Atomic CRM](https://github.com/marmelab/atomic-crm) como shell técnico.
+
+## Arquitectura de cuatro capas
+
+```
+Claridad     →  contexto e inteligencia operativa (pantalla "Hoy", timeline, cohortes)
+WhatsApp     →  capa de acción (canal real de comunicación)
+Google       →  capa de ejecución (Calendar, Drive, Sheets, Gmail)
+Atomic CRM   →  shell técnico (React + Supabase, no se reescribe — se adapta)
+```
+
+## Documentación del producto
+
+La definición de producto, principios, roadmap y compromisos viven en `doc/claridad/`:
+
+- [`01-today-screen-wireframe.md`](./doc/claridad/01-today-screen-wireframe.md) — Wireframe de la pantalla "Hoy", el corazón del producto.
+- [`02-customer-events-schema.md`](./doc/claridad/02-customer-events-schema.md) — Diseño del núcleo técnico: `customer_events`.
+- [`03-claridad-product-readme.md`](./doc/claridad/03-claridad-product-readme.md) — Visión, compromisos, roadmap y reglas no negociables.
+
+## Los cuatro compromisos
+
+1. No abro un editor de código hasta tener la pantalla "Hoy" validada con la primera usuaria real.
+2. No añado tablas nuevas hasta que `customer_events` esté implementada y alimentada.
+3. No considero la Fase 1 completada hasta 14 días de uso autónomo por Yoli.
+4. Si me tienta añadir dashboards, KPIs o "ERP-light", releo el product README.
+
+## La métrica madre
+
+> ¿Cuántos días a la semana Yoli abre Claridad antes que WhatsApp?
+
+Esa es la única métrica que importa en Fase 1.
+
+---
+
+# Atomic CRM (shell técnico)
 
 A full-featured CRM built with React, shadcn-admin-kit, and Supabase.
 
