@@ -196,13 +196,19 @@ async function createContact({
 const getMenuMethod = ({ page }: { page: Page; isMobile: boolean }) => ({
   goToDashboard: async () => {
     await page
-      .getByRole("link", { name: /Today|Dashboard|Aujourd'hui/ })
+      .locator('a[href="/today"], a[href="#/today"], a[href$="/today"]')
+      .first()
       .click();
     await page.waitForLoadState("networkidle");
     await expect(page).toHaveURL(/\/today$/);
   },
   goToContacts: async () => {
-    await page.getByRole("link", { name: /Clients|Contacts/ }).click();
+    await page
+      .locator(
+        'a[href="/contacts"], a[href="#/contacts"], a[href$="/contacts"]',
+      )
+      .first()
+      .click();
     await page.waitForLoadState("networkidle");
     await expect(page).toHaveURL(/\/contacts$/);
   },
