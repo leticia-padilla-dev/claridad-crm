@@ -46,7 +46,9 @@ test.describe("user adding a task", () => {
     await page.getByRole("button", { name: "Sign in" }).click();
 
     await expect(page).toHaveTitle(/Atomic CRM/);
-    await expect(page.getByText("Latest Activity")).toBeVisible();
+    await expect(page).toHaveURL(/\/today$/);
+    await expect(page.getByText("Operational home")).toBeVisible();
+    await expect(page.getByText("Appointments")).toBeVisible();
 
     await menu.goToContacts();
     await page.waitForLoadState("networkidle");
