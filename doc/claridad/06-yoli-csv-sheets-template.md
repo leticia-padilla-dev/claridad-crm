@@ -8,8 +8,8 @@
 
 ## Descargas
 
-- [Clientes](C:/clarida-digital/atomic-crm/doc/claridad/templates/yoli_clientes_template.csv)
-- [Citas](C:/clarida-digital/atomic-crm/doc/claridad/templates/yoli_citas_template.csv)
+- [Clientes](./templates/yoli_clientes_template.csv)
+- [Citas](./templates/yoli_citas_template.csv)
 
 ---
 
