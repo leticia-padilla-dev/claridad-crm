@@ -13,6 +13,7 @@ alter table public.sales enable row level security;
 alter table public.tags enable row level security;
 alter table public.tasks enable row level security;
 alter table public.appointments enable row level security;
+alter table public.customer_events enable row level security;
 alter table public.configuration enable row level security;
 alter table public.favicons_excluded_domains enable row level security;
 
@@ -66,6 +67,10 @@ create policy "Enable read access for authenticated users" on public.appointment
 create policy "Enable insert for authenticated users only" on public.appointments for insert to authenticated with check (true);
 create policy "Appointment Update Policy" on public.appointments for update to authenticated using (true);
 create policy "Appointment Delete Policy" on public.appointments for delete to authenticated using (true);
+
+-- Customer Events
+create policy "customer_events read for authenticated" on public.customer_events for select to authenticated using (true);
+create policy "customer_events insert for authenticated" on public.customer_events for insert to authenticated with check (true);
 
 -- Configuration (admin-only for writes)
 create policy "Enable read for authenticated" on public.configuration for select to authenticated using (true);

@@ -471,3 +471,262 @@ BEGIN
   RETURN NEW;
 END;
 $$;
+
+create or replace function public.resolve_business_line_from_contact(p_contact_id bigint)
+returns bigint
+language sql
+stable
+set search_path to 'public'
+as $$
+  select company_id
+  from public.contacts
+  where id = p_contact_id
+$$;
+
+create or replace function public.tg_customer_events_from_contact_note()
+returns trigger
+language plpgsql
+set search_path to 'public'
+as $$
+begin
+  insert into public.customer_events (
+    contact_id,
+    business_line_id,
+    type,
+    occurred_at,
+    payload,
+    source,
+    sales_id,
+    related_table,
+    related_id
+  )
+  values (
+    new.contact_id,
+    public.resolve_business_line_from_contact(new.contact_id),
+    'note.created',
+    coalesce(new.date, now()),
+    jsonb_build_object(
+      'preview', left(coalesce(new.text, ''), 200),
+      'status', new.status
+    ),
+    'system',
+    new.sales_id,
+    'contact_notes',
+    new.id
+  );
+
+  return new;
+end;
+$$;
+
+create or replace function public.tg_customer_events_from_task()
+returns trigger
+language plpgsql
+set search_path to 'public'
+as $$
+begin
+  if tg_op = 'INSERT' then
+    insert into public.customer_events (
+      contact_id,
+      business_line_id,
+      type,
+      occurred_at,
+      payload,
+      source,
+      sales_id,
+      related_table,
+      related_id
+    )
+    values (
+      new.contact_id,
+      public.resolve_business_line_from_contact(new.contact_id),
+      'task.created',
+      coalesce(new.due_date, now()),
+      jsonb_build_object(
+        'title', new.text,
+        'due_date', new.due_date,
+        'type', new.type
+      ),
+      'system',
+      new.sales_id,
+      'tasks',
+      new.id
+    );
+  elsif tg_op = 'UPDATE'
+        and old.done_date is null
+        and new.done_date is not null then
+    insert into public.customer_events (
+      contact_id,
+      business_line_id,
+      type,
+      occurred_at,
+      payload,
+      source,
+      sales_id,
+      related_table,
+      related_id
+    )
+    values (
+      new.contact_id,
+      public.resolve_business_line_from_contact(new.contact_id),
+      'task.completed',
+      new.done_date,
+      jsonb_build_object('title', new.text),
+      'system',
+      new.sales_id,
+      'tasks',
+      new.id
+    );
+  end if;
+
+  return new;
+end;
+$$;
+
+create or replace function public.tg_customer_events_from_appointment()
+returns trigger
+language plpgsql
+set search_path to 'public'
+as $$
+begin
+  if tg_op = 'INSERT' then
+    insert into public.customer_events (
+      contact_id,
+      business_line_id,
+      type,
+      occurred_at,
+      payload,
+      source,
+      related_table,
+      related_id
+    )
+    values (
+      new.contact_id,
+      public.resolve_business_line_from_contact(new.contact_id),
+      case new.status
+        when 'completed' then 'appointment.completed'
+        when 'cancelled' then 'appointment.cancelled'
+        else 'appointment.created'
+      end,
+      new.scheduled_at,
+      jsonb_build_object(
+        'type', new.type,
+        'status', new.status,
+        'scheduled_at', new.scheduled_at
+      ),
+      'system',
+      'appointments',
+      new.id
+    );
+  elsif tg_op = 'UPDATE'
+        and old.status is distinct from new.status
+        and new.status in ('completed', 'cancelled') then
+    insert into public.customer_events (
+      contact_id,
+      business_line_id,
+      type,
+      occurred_at,
+      payload,
+      source,
+      related_table,
+      related_id
+    )
+    values (
+      new.contact_id,
+      public.resolve_business_line_from_contact(new.contact_id),
+      case new.status
+        when 'completed' then 'appointment.completed'
+        else 'appointment.cancelled'
+      end,
+      coalesce(new.updated_at, now()),
+      jsonb_build_object(
+        'type', new.type,
+        'status', new.status,
+        'scheduled_at', new.scheduled_at
+      ),
+      'system',
+      'appointments',
+      new.id
+    );
+  end if;
+
+  return new;
+end;
+$$;
+
+create or replace function public.tg_customer_events_from_deal()
+returns trigger
+language plpgsql
+set search_path to 'public'
+as $$
+declare
+  v_contact_id bigint;
+begin
+  if tg_op = 'INSERT' then
+    if new.contact_ids is not null then
+      foreach v_contact_id in array new.contact_ids loop
+        insert into public.customer_events (
+          contact_id,
+          business_line_id,
+          type,
+          occurred_at,
+          payload,
+          source,
+          sales_id,
+          related_table,
+          related_id
+        )
+        values (
+          v_contact_id,
+          new.company_id,
+          'opportunity.created',
+          coalesce(new.created_at, now()),
+          jsonb_build_object(
+            'name', new.name,
+            'stage', new.stage,
+            'amount', new.amount
+          ),
+          'system',
+          new.sales_id,
+          'deals',
+          new.id
+        );
+      end loop;
+    end if;
+  elsif tg_op = 'UPDATE'
+        and old.stage is distinct from new.stage then
+    if new.contact_ids is not null then
+      foreach v_contact_id in array new.contact_ids loop
+        insert into public.customer_events (
+          contact_id,
+          business_line_id,
+          type,
+          occurred_at,
+          payload,
+          source,
+          sales_id,
+          related_table,
+          related_id
+        )
+        values (
+          v_contact_id,
+          new.company_id,
+          'opportunity.stage_changed',
+          now(),
+          jsonb_build_object(
+            'name', new.name,
+            'from_stage', old.stage,
+            'to_stage', new.stage
+          ),
+          'system',
+          new.sales_id,
+          'deals',
+          new.id
+        );
+      end loop;
+    end if;
+  end if;
+
+  return new;
+end;
+$$;
