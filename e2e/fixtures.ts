@@ -195,7 +195,9 @@ async function createContact({
 
 const getMenuMethod = ({ page }: { page: Page; isMobile: boolean }) => ({
   goToDashboard: async () => {
-    await page.getByRole("link", { name: /Today|Dashboard|Aujourd'hui/ }).click();
+    await page
+      .getByRole("link", { name: /Today|Dashboard|Aujourd'hui/ })
+      .click();
     await page.waitForLoadState("networkidle");
     await expect(page).toHaveURL(/\/today$/);
   },
