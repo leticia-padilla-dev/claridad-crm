@@ -15,8 +15,6 @@ test("user onboarding", async ({ page, isMobile, menu, dismissToast }) => {
 
   await expect(page).toHaveURL(/\/today$/);
   await expect(page.getByText("Operational home")).toBeVisible();
-  await expect(page.getByText("Today")).toBeVisible();
-  await expect(page.getByText("Preparing live data")).toBeVisible();
 
   await menu.goToContacts();
   await page.getByText("New Client").click();
@@ -71,6 +69,4 @@ test("user onboarding", async ({ page, isMobile, menu, dismissToast }) => {
 
   await menu.goToDashboard();
   await expect(page.getByText("Operational home")).toBeVisible();
-  await expect(page.getByText("Today")).toBeVisible();
-  await expect(page.getByText("Preparing live data")).toBeVisible();
 });

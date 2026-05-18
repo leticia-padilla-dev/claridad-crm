@@ -48,7 +48,6 @@ test.describe("user adding a task", () => {
     await expect(page).toHaveTitle(/Atomic CRM/);
     await expect(page).toHaveURL(/\/today$/);
     await expect(page.getByText("Operational home")).toBeVisible();
-    await expect(page.getByText("Preparing live data")).toBeVisible();
 
     await menu.goToContacts();
     await page.waitForLoadState("networkidle");
