@@ -20,6 +20,7 @@ La definición de producto, principios, roadmap y compromisos viven en `doc/clar
 - [`01-today-screen-wireframe.md`](./doc/claridad/01-today-screen-wireframe.md) — Wireframe de la pantalla "Hoy", el corazón del producto.
 - [`02-customer-events-schema.md`](./doc/claridad/02-customer-events-schema.md) — Diseño del núcleo técnico: `customer_events`.
 - [`03-claridad-product-readme.md`](./doc/claridad/03-claridad-product-readme.md) — Visión, compromisos, roadmap y reglas no negociables.
+- [`04-local-setup.md`](./doc/claridad/04-local-setup.md) — Procedimiento local para verificar migraciones y backfill de Fase 0.5.
 
 ## Los cuatro compromisos
 
