@@ -3,7 +3,6 @@ import {
   CalendarDays,
   ChevronRight,
   HandHeart,
-  ListTodo,
   Sparkles,
   Cake,
 } from "lucide-react";
@@ -15,6 +14,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import MobileHeader from "../layout/MobileHeader";
 import { MobileContent } from "../layout/MobileContent";
 import { useConfigurationContext } from "../root/ConfigurationContext";
+import { TodayOverdueTasksSection } from "./TodayOverdueTasksSection";
 
 type SectionConfig = {
   id: string;
@@ -152,13 +152,6 @@ const TodayPageContent = () => {
 
   const sections: SectionConfig[] = [
     {
-      id: "tasks",
-      title: translate("resources.tasks.name", { smart_count: 2 }),
-      description: translate("crm.today.sections.tasks.description"),
-      icon: ListTodo,
-      skeletonRows: 4,
-    },
-    {
       id: "birthdays",
       title: translate("crm.today.sections.birthdays.title"),
       description: translate("crm.today.sections.birthdays.description"),
@@ -188,6 +181,17 @@ const TodayPageContent = () => {
         aria-label={translate("crm.today.sections_overview")}
         className="grid grid-cols-1 gap-4 lg:grid-cols-2"
       >
+        <ErrorBoundary
+          fallbackRender={() => (
+            <SectionErrorFallback
+              title={translate("crm.today.sections.tasks.title", {
+                smart_count: 0,
+              })}
+            />
+          )}
+        >
+          <TodayOverdueTasksSection />
+        </ErrorBoundary>
         {sections.map((section) => (
           <ErrorBoundary
             key={section.id}

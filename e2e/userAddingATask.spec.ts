@@ -86,7 +86,9 @@ test.describe("user adding a task", () => {
 
       await expect(page).toHaveURL(/\/today$/);
       await expect(page.getByText("Operational home")).toBeVisible();
-      await expect(page.getByText("Seguimientos")).toBeVisible();
+      await expect(page.getByText("Seguimientos vencidos (1)")).toBeVisible();
+      await expect(page.getByText("Follow up with Jane")).toBeVisible();
+      await expect(page.getByRole("button", { name: "Hecho" })).toBeVisible();
     }
   });
 });

@@ -598,8 +598,15 @@ export const englishCrmMessages = {
         "This section couldn't render. The shell stays available while the data widgets are still being built.",
       sections: {
         tasks: {
+          title: "Seguimientos vencidos (%{smart_count})",
           description:
-            "Overdue and urgent follow-ups will appear here once the real query lands.",
+            "Your oldest pending follow-ups appear here first so Today always starts with action.",
+          mark_done: "Hecho",
+          empty_title: "No hay seguimientos pendientes.",
+          empty_description: "Buen trabajo.",
+          view_all: "Ver todos (%{smart_count})",
+          overdue_days:
+            "Pending since yesterday |||| Pending for %{smart_count} days",
         },
         birthdays: {
           title: "Birthdays",
