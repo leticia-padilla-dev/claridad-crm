@@ -111,7 +111,8 @@ const TodaySectionCard = ({
 
 const TodayHeader = () => {
   const translate = useTranslate();
-  const { data: identity } = useGetIdentity<{ fullName?: string }>();
+  const { data } = useGetIdentity();
+  const identity = data as { fullName?: string } | undefined;
   const greeting = translate(getGreetingKey(new Date().getHours()));
   const firstName = getFirstName(identity?.fullName);
   const formattedDate = new Intl.DateTimeFormat(undefined, {
