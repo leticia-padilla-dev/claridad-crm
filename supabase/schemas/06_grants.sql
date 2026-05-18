@@ -61,9 +61,29 @@ grant all on function public.merge_contacts(bigint, bigint) to anon;
 grant all on function public.merge_contacts(bigint, bigint) to authenticated;
 grant all on function public.merge_contacts(bigint, bigint) to service_role;
 
+grant all on function public.resolve_business_line_from_contact(bigint) to anon;
+grant all on function public.resolve_business_line_from_contact(bigint) to authenticated;
+grant all on function public.resolve_business_line_from_contact(bigint) to service_role;
+
 grant all on function public.set_sales_id_default() to anon;
 grant all on function public.set_sales_id_default() to authenticated;
 grant all on function public.set_sales_id_default() to service_role;
+
+grant all on function public.tg_customer_events_from_appointment() to anon;
+grant all on function public.tg_customer_events_from_appointment() to authenticated;
+grant all on function public.tg_customer_events_from_appointment() to service_role;
+
+grant all on function public.tg_customer_events_from_contact_note() to anon;
+grant all on function public.tg_customer_events_from_contact_note() to authenticated;
+grant all on function public.tg_customer_events_from_contact_note() to service_role;
+
+grant all on function public.tg_customer_events_from_deal() to anon;
+grant all on function public.tg_customer_events_from_deal() to authenticated;
+grant all on function public.tg_customer_events_from_deal() to service_role;
+
+grant all on function public.tg_customer_events_from_task() to anon;
+grant all on function public.tg_customer_events_from_task() to authenticated;
+grant all on function public.tg_customer_events_from_task() to service_role;
 
 -- Table grants
 grant all on table public.companies to anon;
@@ -77,6 +97,14 @@ grant all on table public.contacts to service_role;
 grant all on table public.contact_notes to anon;
 grant all on table public.contact_notes to authenticated;
 grant all on table public.contact_notes to service_role;
+
+grant all on table public.appointments to anon;
+grant all on table public.appointments to authenticated;
+grant all on table public.appointments to service_role;
+
+grant all on table public.customer_events to anon;
+grant all on table public.customer_events to authenticated;
+grant all on table public.customer_events to service_role;
 
 grant all on table public.deals to anon;
 grant all on table public.deals to authenticated;
@@ -132,9 +160,17 @@ grant all on sequence public."contactNotes_id_seq" to anon;
 grant all on sequence public."contactNotes_id_seq" to authenticated;
 grant all on sequence public."contactNotes_id_seq" to service_role;
 
+grant all on sequence public.appointments_id_seq to anon;
+grant all on sequence public.appointments_id_seq to authenticated;
+grant all on sequence public.appointments_id_seq to service_role;
+
 grant all on sequence public.contacts_id_seq to anon;
 grant all on sequence public.contacts_id_seq to authenticated;
 grant all on sequence public.contacts_id_seq to service_role;
+
+grant all on sequence public.customer_events_id_seq to anon;
+grant all on sequence public.customer_events_id_seq to authenticated;
+grant all on sequence public.customer_events_id_seq to service_role;
 
 grant all on sequence public."dealNotes_id_seq" to anon;
 grant all on sequence public."dealNotes_id_seq" to authenticated;

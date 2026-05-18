@@ -83,30 +83,38 @@ No se crean policies de `UPDATE` ni `DELETE` para usuarios autenticados. Si nece
 
 ---
 
-## Tipos de eventos (lista completa v1)
+## Tipos de eventos
 
-| Tipo                          | Cuándo se dispara                                 | Fuente típica         |
-| ----------------------------- | ------------------------------------------------- | --------------------- |
-| `note.created`                | Insert en `contact_notes`                         | system                |
-| `note.updated`                | Update significativo en `contact_notes`           | system                |
-| `whatsapp.opened`             | Usuario toca botón "Abrir WhatsApp"               | whatsapp_link         |
-| `email.sent`                  | (futuro) Email enviado desde Claridad             | system                |
-| `task.created`                | Insert en `tasks`                                 | system                |
-| `task.completed`              | `tasks.done_date` pasa de null a valor            | system                |
-| `task.snoozed`                | Usuario pospone seguimiento                       | manual                |
-| `appointment.created`         | Insert en `appointments`                          | system                |
-| `appointment.completed`       | Cita marcada como hecha                           | system / manual       |
-| `appointment.cancelled`       | Cita cancelada                                    | system / manual       |
-| `opportunity.created`         | Insert en `deals` (deals = oportunidades)         | system                |
-| `opportunity.stage_changed`   | Cambio en `deals.stage`                           | system                |
-| `opportunity.won`             | Deal cerrado ganado                               | system                |
-| `opportunity.lost`            | Deal cerrado perdido                              | system                |
-| `order.created`               | (Fase 5) Pedido registrado                        | system                |
-| `order.paid`                  | (Fase 5) Pago confirmado                          | manual                |
-| `order.delivered`             | (Fase 5) Pedido entregado                         | manual                |
-| `catalog.shared`              | Usuario compartió un `catalog_link` por WhatsApp  | manual / whatsapp_link|
-| `birthday.celebrated`         | Yoli usó botón "Felicitar"                        | whatsapp_link         |
-| `reactivation.attempted`      | Yoli contactó clienta fría (>30 días silencio)    | whatsapp_link         |
+### Activos en la migración backbone
+
+| Tipo                        | Cuándo se dispara                         | Fuente típica |
+| --------------------------- | ----------------------------------------- | ------------- |
+| `note.created`              | Insert en `contact_notes`                 | system        |
+| `task.created`              | Insert en `tasks`                         | system        |
+| `task.completed`            | `tasks.done_date` pasa de null a valor    | system        |
+| `appointment.created`       | Insert en `appointments`                  | system        |
+| `appointment.completed`     | Cambio de cita a completada               | system        |
+| `appointment.cancelled`     | Cambio de cita a cancelada                | system        |
+| `opportunity.created`       | Insert en `deals`                         | system        |
+| `opportunity.stage_changed` | Cambio en `deals.stage`                   | system        |
+
+### Reservados para fases posteriores
+
+| Tipo                      | Uso previsto |
+| ------------------------- | ------------ |
+| `note.updated`            | editar notas |
+| `whatsapp.opened`         | CTA WhatsApp |
+| `session.opened`          | métrica madre |
+| `email.sent`              | email futuro |
+| `task.snoozed`            | posponer seguimiento |
+| `opportunity.won`         | cierre comercial |
+| `opportunity.lost`        | cierre comercial |
+| `order.created`           | pedidos |
+| `order.paid`              | pedidos |
+| `order.delivered`         | pedidos |
+| `catalog.shared`          | compartir catálogo |
+| `birthday.celebrated`     | CTA cumpleaños |
+| `reactivation.attempted`  | reactivación |
 
 Añadir tipos nuevos = migración + actualizar este documento. No se inventan tipos sobre la marcha.
 

@@ -48,6 +48,23 @@ create or replace trigger on_public_contact_notes_created_or_updated
     after insert on public.contact_notes
     for each row execute function public.handle_contact_note_created_or_updated();
 
+-- Append-only customer event backbone
+create or replace trigger customer_events_from_contact_note
+    after insert on public.contact_notes
+    for each row execute function public.tg_customer_events_from_contact_note();
+
+create or replace trigger customer_events_from_task
+    after insert or update on public.tasks
+    for each row execute function public.tg_customer_events_from_task();
+
+create or replace trigger customer_events_from_appointment
+    after insert or update on public.appointments
+    for each row execute function public.tg_customer_events_from_appointment();
+
+create or replace trigger customer_events_from_deal
+    after insert or update on public.deals
+    for each row execute function public.tg_customer_events_from_deal();
+
 -- Cleanup storage attachments when contact notes are updated or deleted
 create or replace trigger on_contact_notes_attachments_updated_delete_note_attachments
     after update on public.contact_notes
