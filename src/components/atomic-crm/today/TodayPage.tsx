@@ -14,6 +14,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import MobileHeader from "../layout/MobileHeader";
 import { MobileContent } from "../layout/MobileContent";
 import { useConfigurationContext } from "../root/ConfigurationContext";
+import { useCoreMetric } from "../metrics/useCoreMetric";
 import { TodayOverdueTasksSection } from "./TodayOverdueTasksSection";
 
 type SectionConfig = {
@@ -113,6 +114,7 @@ const TodayHeader = () => {
   const translate = useTranslate();
   const { data } = useGetIdentity();
   const identity = data as { fullName?: string } | undefined;
+  const metric = useCoreMetric();
   const greeting = translate(getGreetingKey(new Date().getHours()));
   const firstName = getFirstName(identity?.fullName);
   const formattedDate = new Intl.DateTimeFormat(undefined, {
@@ -142,6 +144,47 @@ const TodayHeader = () => {
         <p className="max-w-2xl text-sm text-muted-foreground sm:text-base">
           {translate("crm.today.description")}
         </p>
+      </div>
+      <div className="grid gap-3 sm:grid-cols-3">
+        <div className="rounded-xl border bg-background/80 px-4 py-3 shadow-xs">
+          <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+            {translate("crm.today.core_metric.title")}
+          </div>
+          <div className="mt-1 text-2xl font-semibold text-foreground">
+            {translate("crm.today.core_metric.days_before_whatsapp_value", {
+              smart_count: metric.daysBeforeWhatsapp,
+            })}
+          </div>
+          <div className="mt-1 text-sm text-muted-foreground">
+            {translate("crm.today.core_metric.days_before_whatsapp_hint")}
+          </div>
+        </div>
+        <div className="rounded-xl border bg-background/80 px-4 py-3 shadow-xs">
+          <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+            {translate("crm.today.core_metric.active_days_title")}
+          </div>
+          <div className="mt-1 text-2xl font-semibold text-foreground">
+            {translate("crm.today.core_metric.active_days_value", {
+              smart_count: metric.activeDaysThisWeek,
+            })}
+          </div>
+          <div className="mt-1 text-sm text-muted-foreground">
+            {translate("crm.today.core_metric.active_days_hint")}
+          </div>
+        </div>
+        <div className="rounded-xl border bg-background/80 px-4 py-3 shadow-xs">
+          <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+            {translate("crm.today.core_metric.whatsapp_touches_title")}
+          </div>
+          <div className="mt-1 text-2xl font-semibold text-foreground">
+            {translate("crm.today.core_metric.whatsapp_touches_value", {
+              smart_count: metric.whatsappTouchesThisWeek,
+            })}
+          </div>
+          <div className="mt-1 text-sm text-muted-foreground">
+            {translate("crm.today.core_metric.whatsapp_touches_hint")}
+          </div>
+        </div>
       </div>
     </div>
   );

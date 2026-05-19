@@ -592,6 +592,23 @@ export const frenchCrmMessages = {
       kicker: "Accueil opérationnel",
       description:
         "Ceci devient l'espace de travail quotidien de Claridad. Les widgets réels arriveront dans les prochains slices.",
+      core_metric: {
+        title: "Claridad avant WhatsApp",
+        days_before_whatsapp_value:
+          "%{smart_count} jour cette semaine |||| %{smart_count} jours cette semaine",
+        days_before_whatsapp_hint:
+          "Jours ou Claridad a ete ouverte avant le premier usage WhatsApp depuis l'application.",
+        active_days_title: "Jours actifs",
+        active_days_value:
+          "%{smart_count} jour avec ouverture |||| %{smart_count} jours avec ouverture",
+        active_days_hint:
+          "Ouvertures enregistrees cette semaine depuis cet appareil.",
+        whatsapp_touches_title: "Usages WhatsApp",
+        whatsapp_touches_value:
+          "%{smart_count} usage depuis Claridad |||| %{smart_count} usages depuis Claridad",
+        whatsapp_touches_hint:
+          "Usage hebdomadaire du CTA WhatsApp dans le flux operationnel.",
+      },
       greeting_with_name: "%{greeting}, %{name}",
       greetings: {
         morning: "Bonjour",

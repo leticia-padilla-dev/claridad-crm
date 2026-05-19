@@ -256,6 +256,23 @@ describe("TodayOverdueTasksSection", () => {
       })
       .toBe(1);
 
+    await expect
+      .poll(async () => {
+        const { data } = await dataProvider!.getList("customer_events", {
+          filter: { type: "whatsapp.opened" },
+          pagination: { page: 1, perPage: 10 },
+          sort: { field: "id", order: "DESC" },
+        });
+
+        return data[0]?.payload;
+      })
+      .toMatchObject({
+        day_key: expect.any(String),
+        phone_number: "+34 612 34 56 78",
+        session_id: expect.any(String),
+        task_text: "Follow up with Jane",
+      });
+
     expect(windowOpenSpy).toHaveBeenCalledWith(
       expect.stringContaining(
         "https://wa.me/34612345678?text=Hola%20Jane%2C%20te%20escribo",
