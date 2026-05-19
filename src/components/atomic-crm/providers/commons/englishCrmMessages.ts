@@ -601,7 +601,9 @@ export const englishCrmMessages = {
           title: "Seguimientos vencidos (%{smart_count})",
           description:
             "Los seguimientos pendientes mas antiguos aparecen primero para que Hoy siempre arranque por la accion.",
+          open_whatsapp: "Abrir WhatsApp",
           mark_done: "Hecho",
+          missing_whatsapp: "Sin numero registrado",
           empty_title: "No hay seguimientos pendientes.",
           empty_description: "Buen trabajo.",
           view_all: "Ver todos (%{smart_count})",

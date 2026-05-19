@@ -28,6 +28,7 @@ import {
   contactBusinessLines,
   translateContactBusinessLineLabel,
 } from "../contacts/contactModel";
+import { OpenWhatsAppButton } from "../whatsapp/OpenWhatsAppButton";
 
 const MAX_VISIBLE_TASKS = 5;
 
@@ -119,7 +120,12 @@ const OverdueTaskCard = ({
 
       <p className="mt-3 text-sm text-foreground">{task.text}</p>
 
-      <div className="mt-4 flex justify-end">
+      <div className="mt-4 flex flex-wrap justify-end gap-2">
+        <OpenWhatsAppButton
+          contact={contact}
+          task={task}
+          businessLineLabel={businessLineLabel}
+        />
         <Button
           size="sm"
           variant="outline"

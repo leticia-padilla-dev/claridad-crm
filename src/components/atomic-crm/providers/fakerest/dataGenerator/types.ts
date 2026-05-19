@@ -3,6 +3,7 @@ import type {
   Company,
   Contact,
   ContactNote,
+  CustomerEvent,
   Deal,
   DealNote,
   Sale,
@@ -16,6 +17,7 @@ export interface Db {
   companies: Company[];
   contacts: Contact[];
   contact_notes: ContactNote[];
+  customer_events: CustomerEvent[];
   deals: Deal[];
   deal_notes: DealNote[];
   sales: Sale[];

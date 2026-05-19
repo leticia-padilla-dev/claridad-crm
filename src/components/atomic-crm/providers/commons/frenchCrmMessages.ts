@@ -608,7 +608,9 @@ export const frenchCrmMessages = {
           title: "Suivis en retard (%{smart_count})",
           description:
             "Les suivis les plus anciens apparaissent ici en premier pour démarrer la journée par l'action.",
+          open_whatsapp: "Ouvrir WhatsApp",
           mark_done: "Fait",
+          missing_whatsapp: "Aucun numero enregistre",
           empty_title: "Aucun suivi en attente.",
           empty_description: "Bon travail.",
           view_all: "Voir tout (%{smart_count})",

@@ -88,6 +88,9 @@ test.describe("user adding a task", () => {
       await expect(page.getByText("Inicio operativo")).toBeVisible();
       await expect(page.getByText("Seguimientos vencidos (1)")).toBeVisible();
       await expect(page.getByText("Follow up with Jane")).toBeVisible();
+      await expect(
+        page.getByRole("button", { name: "Abrir WhatsApp" }),
+      ).toBeVisible();
       await expect(page.getByRole("button", { name: "Hecho" })).toBeVisible();
     }
   });
