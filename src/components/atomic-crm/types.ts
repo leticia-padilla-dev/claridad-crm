@@ -175,6 +175,21 @@ export type Appointment = {
   updated_at?: string;
 } & Pick<RaRecord, "id">;
 
+export type CatalogLinkType = "catalog" | "link" | "campaign" | "promotion";
+
+export type CatalogLink = {
+  title: string;
+  url: string;
+  type: CatalogLinkType;
+  business_line?: ContactBusinessLineValue | null;
+  campaign?: string | null;
+  active: boolean;
+  notes?: string | null;
+  sales_id?: Identifier | null;
+  created_at?: string;
+  updated_at?: string;
+} & Pick<RaRecord, "id">;
+
 export type CustomerEventType =
   | "note.created"
   | "note.updated"

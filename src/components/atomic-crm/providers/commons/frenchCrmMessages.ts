@@ -264,6 +264,52 @@ export const frenchCrmMessages = {
         },
       },
     },
+    catalog_links: {
+      name: "Lien de catalogue |||| Liens de catalogue",
+      forcedCaseName: "Lien de catalogue",
+      fields: {
+        title: "Titre",
+        url: "URL",
+        type: "Type",
+        business_line: "Ligne d'activité",
+        campaign: "Campagne",
+        active: "Actif",
+        active_yes: "Actif",
+        active_no: "Inactif",
+        notes: "Notes",
+        created_at: "Créé le",
+      },
+      action: {
+        create: "Créer un lien",
+        edit: "Modifier le lien",
+        new: "Nouveau lien",
+        show: "Afficher le lien",
+      },
+      filters: {
+        all_business_lines: "Toutes les lignes d'activité",
+        all_types: "Tous les types",
+      },
+      validation: {
+        url_format: "Doit être une URL commençant par http:// ou https://",
+      },
+      empty: "Aucun lien pour le moment",
+      added: "Lien ajouté",
+      updated: "Lien mis à jour",
+      deleted: "Lien supprimé",
+      inputs: {
+        types: {
+          catalog: "Catalogue",
+          link: "Lien",
+          campaign: "Campagne",
+          promotion: "Promotion",
+        },
+        business_lines: {
+          "mary-kay": "Mary Kay",
+          "beyond-beauty": "Beyond Beauty",
+          incruises: "In Cruises",
+        },
+      },
+    },
     deals: {
       name: "Affaire |||| Affaires",
       fields: {

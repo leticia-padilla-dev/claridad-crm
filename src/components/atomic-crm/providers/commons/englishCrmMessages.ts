@@ -259,6 +259,52 @@ export const englishCrmMessages = {
         },
       },
     },
+    catalog_links: {
+      name: "Catalog link |||| Catalog links",
+      forcedCaseName: "Catalog link",
+      fields: {
+        title: "Title",
+        url: "URL",
+        type: "Type",
+        business_line: "Business line",
+        campaign: "Campaign",
+        active: "Active",
+        active_yes: "Active",
+        active_no: "Inactive",
+        notes: "Notes",
+        created_at: "Created at",
+      },
+      action: {
+        create: "Create catalog link",
+        edit: "Edit catalog link",
+        new: "New catalog link",
+        show: "Show catalog link",
+      },
+      filters: {
+        all_business_lines: "All business lines",
+        all_types: "All types",
+      },
+      validation: {
+        url_format: "Must be a URL starting with http:// or https://",
+      },
+      empty: "No catalog links yet",
+      added: "Catalog link added",
+      updated: "Catalog link updated",
+      deleted: "Catalog link deleted",
+      inputs: {
+        types: {
+          catalog: "Catalog",
+          link: "Link",
+          campaign: "Campaign",
+          promotion: "Promotion",
+        },
+        business_lines: {
+          "mary-kay": "Mary Kay",
+          "beyond-beauty": "Beyond Beauty",
+          incruises: "In Cruises",
+        },
+      },
+    },
     deals: {
       name: "Deal |||| Deals",
       fields: {
