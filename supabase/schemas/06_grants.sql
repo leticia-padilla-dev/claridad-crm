@@ -102,6 +102,10 @@ grant all on table public.appointments to anon;
 grant all on table public.appointments to authenticated;
 grant all on table public.appointments to service_role;
 
+grant all on table public.catalog_links to anon;
+grant all on table public.catalog_links to authenticated;
+grant all on table public.catalog_links to service_role;
+
 grant all on table public.customer_events to anon;
 grant all on table public.customer_events to authenticated;
 grant all on table public.customer_events to service_role;
@@ -163,6 +167,10 @@ grant all on sequence public."contactNotes_id_seq" to service_role;
 grant all on sequence public.appointments_id_seq to anon;
 grant all on sequence public.appointments_id_seq to authenticated;
 grant all on sequence public.appointments_id_seq to service_role;
+
+grant all on sequence public.catalog_links_id_seq to anon;
+grant all on sequence public.catalog_links_id_seq to authenticated;
+grant all on sequence public.catalog_links_id_seq to service_role;
 
 grant all on sequence public.contacts_id_seq to anon;
 grant all on sequence public.contacts_id_seq to authenticated;

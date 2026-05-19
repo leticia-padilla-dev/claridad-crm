@@ -1,5 +1,6 @@
 import type {
   Appointment,
+  CatalogLink,
   Company,
   Contact,
   ContactNote,
@@ -14,6 +15,7 @@ import type { ConfigurationContextValue } from "../../../root/ConfigurationConte
 
 export interface Db {
   appointments: Appointment[];
+  catalog_links: CatalogLink[];
   companies: Company[];
   contacts: Contact[];
   contact_notes: ContactNote[];

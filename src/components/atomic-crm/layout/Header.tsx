@@ -2,6 +2,7 @@ import {
   CalendarDays,
   FileText,
   Import,
+  Link2,
   Settings,
   User,
   Users,
@@ -33,6 +34,8 @@ const Header = () => {
     currentPath = "/contacts";
   } else if (matchPath("/appointments/*", location.pathname)) {
     currentPath = "/appointments";
+  } else if (matchPath("/catalog_links/*", location.pathname)) {
+    currentPath = "/catalog_links";
   } else if (matchPath("/companies/*", location.pathname)) {
     currentPath = "/companies";
   } else if (matchPath("/deals/*", location.pathname)) {
@@ -84,6 +87,14 @@ const Header = () => {
                     to="/appointments"
                     isActive={currentPath === "/appointments"}
                     icon={<CalendarDays className="size-4" />}
+                  />
+                  <NavigationTab
+                    label={translate("resources.catalog_links.name", {
+                      smart_count: 2,
+                    })}
+                    to="/catalog_links"
+                    isActive={currentPath === "/catalog_links"}
+                    icon={<Link2 className="size-4" />}
                   />
                 </nav>
               </div>
