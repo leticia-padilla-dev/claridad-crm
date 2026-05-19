@@ -605,8 +605,15 @@ export const frenchCrmMessages = {
         "Cette section n'a pas pu s'afficher. Le shell reste disponible pendant que les widgets de données sont en cours de construction.",
       sections: {
         tasks: {
+          title: "Suivis en retard (%{smart_count})",
           description:
-            "Les suivis en retard et prioritaires apparaîtront ici une fois la vraie requête branchée.",
+            "Les suivis les plus anciens apparaissent ici en premier pour démarrer la journée par l'action.",
+          mark_done: "Fait",
+          empty_title: "Aucun suivi en attente.",
+          empty_description: "Bon travail.",
+          view_all: "Voir tout (%{smart_count})",
+          overdue_days:
+            "En attente depuis hier |||| En attente depuis %{smart_count} jours",
         },
         birthdays: {
           title: "Anniversaires",

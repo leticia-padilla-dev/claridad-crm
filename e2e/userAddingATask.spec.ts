@@ -47,7 +47,7 @@ test.describe("user adding a task", () => {
 
     await expect(page).toHaveTitle(/Atomic CRM/);
     await expect(page).toHaveURL(/\/today$/);
-    await expect(page.getByText("Operational home")).toBeVisible();
+    await expect(page.getByText("Inicio operativo")).toBeVisible();
 
     await menu.goToContacts();
     await page.waitForLoadState("networkidle");
@@ -85,8 +85,10 @@ test.describe("user adding a task", () => {
       await menu.goToDashboard();
 
       await expect(page).toHaveURL(/\/today$/);
-      await expect(page.getByText("Operational home")).toBeVisible();
-      await expect(page.getByText("Seguimientos")).toBeVisible();
+      await expect(page.getByText("Inicio operativo")).toBeVisible();
+      await expect(page.getByText("Seguimientos vencidos (1)")).toBeVisible();
+      await expect(page.getByText("Follow up with Jane")).toBeVisible();
+      await expect(page.getByRole("button", { name: "Hecho" })).toBeVisible();
     }
   });
 });

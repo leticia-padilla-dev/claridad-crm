@@ -14,7 +14,7 @@ test("user onboarding", async ({ page, isMobile, menu, dismissToast }) => {
   await page.getByRole("button", { name: "Create account" }).click();
 
   await expect(page).toHaveURL(/\/today$/);
-  await expect(page.getByText("Operational home")).toBeVisible();
+  await expect(page.getByText("Inicio operativo")).toBeVisible();
 
   await menu.goToContacts();
   await page.getByText("New Client").click();
@@ -68,5 +68,5 @@ test("user onboarding", async ({ page, isMobile, menu, dismissToast }) => {
   await expect(page.getByText("CEO at Smith Corp")).toBeVisible();
 
   await menu.goToDashboard();
-  await expect(page.getByText("Operational home")).toBeVisible();
+  await expect(page.getByText("Inicio operativo")).toBeVisible();
 });
