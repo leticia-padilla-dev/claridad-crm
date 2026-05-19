@@ -21,6 +21,8 @@ La definición de producto, principios, roadmap y compromisos viven en `doc/clar
 - [`02-customer-events-schema.md`](./doc/claridad/02-customer-events-schema.md) — Diseño del núcleo técnico: `customer_events`.
 - [`03-claridad-product-readme.md`](./doc/claridad/03-claridad-product-readme.md) — Visión, compromisos, roadmap y reglas no negociables.
 - [`04-local-setup.md`](./doc/claridad/04-local-setup.md) — Procedimiento local para verificar migraciones y backfill de Fase 0.5.
+- [`05-yoli-pilot-runbook.md`](./doc/claridad/05-yoli-pilot-runbook.md) — Runbook operativo para el piloto real con Yoli.
+- [`06-yoli-csv-sheets-template.md`](./doc/claridad/06-yoli-csv-sheets-template.md) — Plantillas de captura inicial para clientes y citas.
 
 ## Los cuatro compromisos
 
