@@ -7,7 +7,8 @@ export const catalogLinkTypes: { value: CatalogLinkType; label: string }[] = [
   { value: "promotion", label: "promotion" },
 ] as const;
 
-export const defaultCatalogLinkType: CatalogLinkType = catalogLinkTypes[1].value;
+export const defaultCatalogLinkType: CatalogLinkType =
+  catalogLinkTypes[1].value;
 
 export const translateCatalogLinkTypeLabel = (
   choice: { label: string },
@@ -22,7 +23,8 @@ export const translateCatalogLinkBusinessLineLabel = (
   translate: (key: string, options?: Record<string, unknown>) => string,
 ) =>
   translate(
-    choice.label ?? `resources.catalog_links.inputs.business_lines.${choice.value}`,
+    choice.label ??
+      `resources.catalog_links.inputs.business_lines.${choice.value}`,
     {
       _: choice.value,
     },

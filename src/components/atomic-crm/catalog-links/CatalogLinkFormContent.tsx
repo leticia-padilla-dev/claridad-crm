@@ -30,20 +30,13 @@ export const CatalogLinkFormContent = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <TextInput
-        source="title"
-        validate={required()}
-        helperText={false}
-      />
+      <TextInput source="title" validate={required()} helperText={false} />
 
       <TextInput
         source="url"
         validate={[
           required(),
-          regex(
-            URL_PATTERN,
-            "resources.catalog_links.validation.url_format",
-          ),
+          regex(URL_PATTERN, "resources.catalog_links.validation.url_format"),
         ]}
         helperText={false}
       />

@@ -38,7 +38,10 @@ const sampleCampaigns = [
 
 export const generateCatalogLinks = (db: Db, size = 24) => {
   return Array.from(Array(size).keys()).map<CatalogLink>((id) => {
-    const createdAt = randomDate(new Date("2025-01-01"), new Date()).toISOString();
+    const createdAt = randomDate(
+      new Date("2025-01-01"),
+      new Date(),
+    ).toISOString();
     return {
       id,
       title: random.arrayElement(sampleTitles),

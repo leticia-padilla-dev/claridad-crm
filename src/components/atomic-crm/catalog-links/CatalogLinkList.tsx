@@ -1,11 +1,7 @@
 import { useTranslate } from "ra-core";
 import { ExternalLink } from "lucide-react";
 
-import {
-  CreateButton,
-  DateField,
-  List,
-} from "@/components/admin";
+import { CreateButton, DateField, List } from "@/components/admin";
 import { DataTable } from "@/components/admin/data-table";
 import { SearchInput } from "@/components/admin/search-input";
 import { SelectInput } from "@/components/admin/select-input";
