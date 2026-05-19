@@ -581,46 +581,45 @@ export const englishCrmMessages = {
       label: "CRM navigation",
     },
     today: {
-      title: "Today",
-      kicker: "Operational home",
+      title: "Hoy",
+      kicker: "Inicio operativo",
       description:
-        "This is the new daily workspace for Claridad. The live widgets will land here in the next slices.",
+        "Este es el espacio diario de Claridad. Los widgets con datos reales irán aterrizando en los siguientes slices.",
       greeting_with_name: "%{greeting}, %{name}",
       greetings: {
-        morning: "Good morning",
-        afternoon: "Good afternoon",
-        evening: "Good evening",
+        morning: "Buenos dias",
+        afternoon: "Buenas tardes",
+        evening: "Buenas noches",
       },
-      shell_state: "Shell state",
-      shell_state_value: "Preparing live data",
-      sections_overview: "Today screen sections",
+      shell_state: "Estado del shell",
+      shell_state_value: "Preparando datos reales",
+      sections_overview: "Secciones de Hoy",
       section_error:
-        "This section couldn't render. The shell stays available while the data widgets are still being built.",
+        "No se pudo renderizar esta seccion. El shell sigue disponible mientras terminamos de conectar los widgets reales.",
       sections: {
         tasks: {
           title: "Seguimientos vencidos (%{smart_count})",
           description:
-            "Your oldest pending follow-ups appear here first so Today always starts with action.",
+            "Los seguimientos pendientes mas antiguos aparecen primero para que Hoy siempre arranque por la accion.",
           mark_done: "Hecho",
           empty_title: "No hay seguimientos pendientes.",
           empty_description: "Buen trabajo.",
           view_all: "Ver todos (%{smart_count})",
           overdue_days:
-            "Pending since yesterday |||| Pending for %{smart_count} days",
+            "Pendiente desde ayer |||| Pendiente desde hace %{smart_count} dias",
         },
         birthdays: {
-          title: "Birthdays",
+          title: "Cumpleanos",
           description:
-            "Upcoming birthdays and client moments will surface here for proactive outreach.",
+            "Los proximos cumpleanos y momentos clave de clientas apareceran aqui para facilitar el seguimiento proactivo.",
         },
         appointments: {
-          description:
-            "Today's appointments and quick entry points will live here.",
+          description: "Las citas de hoy y sus accesos rapidos viviran aqui.",
         },
         touch_this_week: {
-          title: "Touch This Week",
+          title: "Toca esta semana",
           description:
-            "Clients needing attention this week will be grouped here as a simple operational queue.",
+            "Las clientas que requieren atencion esta semana se agruparan aqui como una cola operativa simple.",
         },
       },
     },
