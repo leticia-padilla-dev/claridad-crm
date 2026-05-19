@@ -168,6 +168,20 @@ export const englishCrmMessages = {
           "Tag added to %{smart_count} client |||| Tag added to %{smart_count} clients",
         title: "Add tag to clients",
       },
+      timeline: {
+        empty: "No hay actividad registrada con esta clienta todavia",
+        events: {
+          note_created: "Nota creada",
+          note_without_preview: "Sin vista previa disponible",
+          task_created: "Seguimiento creado",
+          task_completed: "Seguimiento completado",
+          opportunity_created: "Oportunidad creada",
+          opportunity_stage_changed: "Cambio de etapa de oportunidad",
+          no_context: "Sin contexto adicional",
+          stage_label: "Etapa: %{stage}",
+          stage_changed_detail: "%{name} paso de %{from} a %{to}",
+        },
+      },
       merge: {
         action: "Merge with another client",
         confirm: "Merge Clients",
@@ -448,6 +462,7 @@ export const englishCrmMessages = {
       activity: "Activity",
       added: "added",
       details: "Details",
+      history: "Historia",
       last_activity_with_date: "last activity %{date}",
       load_more: "Load more",
       misc: "Misc",

@@ -34,6 +34,7 @@ import type { Contact } from "../types";
 import { Avatar } from "./Avatar";
 import { ContactAside } from "./ContactAside";
 import { MobileBackButton } from "../misc/MobileBackButton";
+import { CustomerTimeline } from "./CustomerTimeline";
 
 export const ContactShow = (props: ShowBaseProps = {}) => {
   const isMobile = useIsMobile();
@@ -135,23 +136,30 @@ const ContactShowContentMobile = () => {
           </div>
         </div>
 
-        <Tabs defaultValue="notes" className="w-full">
-          <TabsList className="grid w-full grid-cols-4 h-10">
-            <TabsTrigger value="notes">
+        <Tabs defaultValue="history" className="w-full">
+          <TabsList className="h-auto w-full justify-start gap-2 overflow-x-auto rounded-lg bg-transparent p-0">
+            <TabsTrigger value="history" className="shrink-0">
+              {translate("crm.common.history")}
+            </TabsTrigger>
+            <TabsTrigger value="notes" className="shrink-0">
               {translate("resources.notes.name", { smart_count: 2 })}
             </TabsTrigger>
-            <TabsTrigger value="appointments">
+            <TabsTrigger value="appointments" className="shrink-0">
               {translate("resources.appointments.name", { smart_count: 2 })}
             </TabsTrigger>
-            <TabsTrigger value="tasks">
+            <TabsTrigger value="tasks" className="shrink-0">
               {translate("crm.common.task_count", {
                 smart_count: taskCount ?? 0,
               })}
             </TabsTrigger>
-            <TabsTrigger value="details">
+            <TabsTrigger value="details" className="shrink-0">
               {translate("crm.common.details")}
             </TabsTrigger>
           </TabsList>
+
+          <TabsContent value="history" className="mt-4">
+            <CustomerTimeline contactId={record.id} />
+          </TabsContent>
 
           <TabsContent value="notes" className="mt-2">
             <InfiniteListBase
@@ -298,19 +306,38 @@ const ContactShowContent = () => {
                 </ReferenceField>
               </div>
             </div>
-            <InfiniteListBase
-              resource="contact_notes"
-              filter={{ contact_id: record.id }}
-              sort={{ field: "date", order: "DESC" }}
-              perPage={25}
-              disableSyncWithLocation
-              storeKey={false}
-              empty={
-                <NoteCreate reference="contacts" showStatus className="mt-4" />
-              }
-            >
-              <NotesIterator reference="contacts" showStatus />
-            </InfiniteListBase>
+            <Tabs defaultValue="history" className="mt-4">
+              <TabsList>
+                <TabsTrigger value="history">
+                  {translate("crm.common.history")}
+                </TabsTrigger>
+                <TabsTrigger value="notes">
+                  {translate("resources.notes.name", { smart_count: 2 })}
+                </TabsTrigger>
+              </TabsList>
+              <TabsContent value="history" className="mt-4">
+                <CustomerTimeline contactId={record.id} />
+              </TabsContent>
+              <TabsContent value="notes" className="mt-4">
+                <InfiniteListBase
+                  resource="contact_notes"
+                  filter={{ contact_id: record.id }}
+                  sort={{ field: "date", order: "DESC" }}
+                  perPage={25}
+                  disableSyncWithLocation
+                  storeKey={false}
+                  empty={
+                    <NoteCreate
+                      reference="contacts"
+                      showStatus
+                      className="mt-4"
+                    />
+                  }
+                >
+                  <NotesIterator reference="contacts" showStatus />
+                </InfiniteListBase>
+              </TabsContent>
+            </Tabs>
           </CardContent>
         </Card>
       </div>

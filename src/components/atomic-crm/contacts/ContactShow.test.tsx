@@ -23,6 +23,9 @@ describe("ContactShow", () => {
     const screen = await render(<MobileSuccess />);
 
     await expect
+      .element(screen.getByRole("tab", { name: "Historia" }))
+      .toBeVisible();
+    await expect
       .element(screen.getByRole("tab", { name: /0 seguimiento/i }))
       .toBeVisible();
     await expect

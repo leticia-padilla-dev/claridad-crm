@@ -173,6 +173,20 @@ export const frenchCrmMessages = {
           "Étiquette ajoutée à %{smart_count} client |||| Étiquette ajoutée à %{smart_count} clients",
         title: "Ajouter une étiquette aux clients",
       },
+      timeline: {
+        empty: "Aucune activite enregistree avec cette cliente pour le moment",
+        events: {
+          note_created: "Note creee",
+          note_without_preview: "Aucun apercu disponible",
+          task_created: "Suivi cree",
+          task_completed: "Suivi termine",
+          opportunity_created: "Opportunite creee",
+          opportunity_stage_changed: "Changement d'etape de l'opportunite",
+          no_context: "Aucun contexte supplementaire",
+          stage_label: "Etape : %{stage}",
+          stage_changed_detail: "%{name} est passe de %{from} a %{to}",
+        },
+      },
       merge: {
         action: "Fusionner avec un autre client",
         confirm: "Fusionner les clients",
@@ -454,6 +468,7 @@ export const frenchCrmMessages = {
       activity: "Activité",
       added: "ajoutée",
       details: "Détails",
+      history: "Historique",
       last_activity_with_date: "dernière activité %{date}",
       load_more: "Charger plus",
       misc: "Divers",
