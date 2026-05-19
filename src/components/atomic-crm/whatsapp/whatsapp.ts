@@ -42,6 +42,19 @@ export const getWhatsAppTemplate = ({
   return `Hola ${firstName}, te escribo desde Claridad para retomar tu seguimiento pendiente${lineSuffix}: ${task.text}`;
 };
 
+export const getBirthdayWhatsAppTemplate = ({
+  contact,
+  businessLineLabel,
+}: {
+  contact?: Contact | null;
+  businessLineLabel?: string | null;
+}) => {
+  const firstName = contact?.first_name?.trim() || "hola";
+  const lineSuffix = businessLineLabel ? ` desde ${businessLineLabel}` : "";
+
+  return `Hola ${firstName}, feliz cumpleanos. Te escribo${lineSuffix} para mandarte un abrazo y quedar a disposicion si necesitas algo hoy.`;
+};
+
 export const buildWhatsAppUrl = ({
   contact,
   task,
@@ -60,6 +73,27 @@ export const buildWhatsAppUrl = ({
   const message = getWhatsAppTemplate({
     contact,
     task,
+    businessLineLabel,
+  });
+
+  return `https://wa.me/${normalizedNumber}?text=${encodeURIComponent(message)}`;
+};
+
+export const buildBirthdayWhatsAppUrl = ({
+  contact,
+  businessLineLabel,
+}: {
+  contact?: Contact | null;
+  businessLineLabel?: string | null;
+}) => {
+  const normalizedNumber = normalizeWhatsAppNumber(getWhatsAppNumber(contact));
+
+  if (!normalizedNumber) {
+    return null;
+  }
+
+  const message = getBirthdayWhatsAppTemplate({
+    contact,
     businessLineLabel,
   });
 
