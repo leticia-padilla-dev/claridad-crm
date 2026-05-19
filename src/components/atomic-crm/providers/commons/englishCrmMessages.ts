@@ -678,7 +678,26 @@ export const englishCrmMessages = {
         touch_this_week: {
           title: "Toca esta semana",
           description:
-            "Las clientas que requieren atencion esta semana se agruparan aqui como una cola operativa simple.",
+            "Una vista ligera para anticipar reactivaciones, oportunidades sin movimiento y momentos relacionales cercanos.",
+          rows: {
+            no_contact: {
+              title: "Clientas sin contacto",
+              hint: "Sin actividad registrada desde hace mas de %{smart_count} dias.",
+              cta: "Ver clientas",
+            },
+            opportunities: {
+              title: "Oportunidades sin actividad",
+              hint: "Sin movimiento visible desde hace mas de %{smart_count} dias.",
+              cta: "Ver oportunidades",
+            },
+            birthdays: {
+              title: "Cumpleanos proximos",
+              hint: "Clientas que cumplen dentro de los proximos %{smart_count} dias.",
+              cta: "Ver cumpleanos",
+            },
+          },
+          footer:
+            "La idea no es abarcarlo todo hoy, sino saber donde conviene volver a mirar esta semana.",
         },
       },
     },

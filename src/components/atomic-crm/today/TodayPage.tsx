@@ -1,9 +1,8 @@
 import { ErrorBoundary } from "react-error-boundary";
-import { ChevronRight, HandHeart, Sparkles } from "lucide-react";
+import { ChevronRight, Sparkles } from "lucide-react";
 import { useGetIdentity, useTranslate } from "ra-core";
 import { Link } from "react-router";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
 import { useIsMobile } from "@/hooks/use-mobile";
 import MobileHeader from "../layout/MobileHeader";
 import { MobileContent } from "../layout/MobileContent";
@@ -12,14 +11,7 @@ import { useCoreMetric } from "../metrics/useCoreMetric";
 import { TodayAppointmentsSection } from "./TodayAppointmentsSection";
 import { TodayBirthdaysSection } from "./TodayBirthdaysSection";
 import { TodayOverdueTasksSection } from "./TodayOverdueTasksSection";
-
-type SectionConfig = {
-  id: string;
-  title: string;
-  description: string;
-  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-  skeletonRows?: number;
-};
+import { TodayWeeklyTouchCountersSection } from "./TodayWeeklyTouchCountersSection";
 
 const getGreetingKey = (hour: number) => {
   if (hour < 12) return "crm.today.greetings.morning";
@@ -51,56 +43,6 @@ const SectionErrorFallback = ({ title }: { title: string }) => {
           {translate("crm.common.retry")}
           <ChevronRight className="size-4" />
         </Link>
-      </CardContent>
-    </Card>
-  );
-};
-
-const TodaySectionCard = ({
-  title,
-  description,
-  icon: Icon,
-  skeletonRows = 4,
-}: SectionConfig) => {
-  const translate = useTranslate();
-
-  return (
-    <Card className="h-full gap-4">
-      <CardHeader className="gap-3">
-        <div className="flex items-start justify-between gap-4">
-          <div className="space-y-1">
-            <CardTitle className="text-base">{title}</CardTitle>
-            <p className="text-sm text-muted-foreground">{description}</p>
-          </div>
-          <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-secondary text-secondary-foreground">
-            <Icon className="size-5" />
-          </div>
-        </div>
-      </CardHeader>
-      <CardContent className="space-y-3">
-        <div className="flex items-center justify-between rounded-lg border bg-muted/30 px-3 py-2 text-xs uppercase tracking-wide text-muted-foreground">
-          <span>{translate("crm.today.shell_state")}</span>
-          <span>{translate("crm.today.shell_state_value")}</span>
-        </div>
-        <div className="space-y-2">
-          {Array.from({ length: skeletonRows }).map((_, index) => (
-            <div
-              key={`${title}-row-${index}`}
-              className="rounded-lg border bg-background px-3 py-3"
-            >
-              <Skeleton
-                className={`h-4 ${
-                  index % 3 === 0
-                    ? "w-2/3"
-                    : index % 3 === 1
-                      ? "w-5/6"
-                      : "w-3/4"
-                }`}
-              />
-              <Skeleton className="mt-2 h-3 w-1/2" />
-            </div>
-          ))}
-        </div>
       </CardContent>
     </Card>
   );
@@ -189,16 +131,6 @@ const TodayHeader = () => {
 const TodayPageContent = () => {
   const translate = useTranslate();
 
-  const sections: SectionConfig[] = [
-    {
-      id: "touch_this_week",
-      title: translate("crm.today.sections.touch_this_week.title"),
-      description: translate("crm.today.sections.touch_this_week.description"),
-      icon: HandHeart,
-      skeletonRows: 4,
-    },
-  ];
-
   return (
     <div className="space-y-6 pb-8">
       <TodayHeader />
@@ -239,16 +171,15 @@ const TodayPageContent = () => {
         >
           <TodayAppointmentsSection />
         </ErrorBoundary>
-        {sections.map((section) => (
-          <ErrorBoundary
-            key={section.id}
-            fallbackRender={() => (
-              <SectionErrorFallback title={section.title} />
-            )}
-          >
-            <TodaySectionCard {...section} />
-          </ErrorBoundary>
-        ))}
+        <ErrorBoundary
+          fallbackRender={() => (
+            <SectionErrorFallback
+              title={translate("crm.today.sections.touch_this_week.title")}
+            />
+          )}
+        >
+          <TodayWeeklyTouchCountersSection />
+        </ErrorBoundary>
       </section>
     </div>
   );
