@@ -12,6 +12,10 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+  getOrCreateCoreMetricSession,
+  recordWhatsappOpened,
+} from "../metrics/coreMetric";
 import type { Contact, CustomerEvent, Task } from "../types";
 import { buildWhatsAppUrl, getWhatsAppNumber } from "./whatsapp";
 
@@ -38,14 +42,23 @@ export const OpenWhatsAppButton = ({
     }
 
     try {
+      const session =
+        typeof window !== "undefined" &&
+        window.localStorage &&
+        window.sessionStorage
+          ? getOrCreateCoreMetricSession(window.sessionStorage)
+          : null;
+
       await dataProvider.create<CustomerEvent>("customer_events", {
         data: {
           business_line_id: contact.company_id ?? null,
           contact_id: contact.id,
           occurred_at: new Date().toISOString(),
           payload: {
+            day_key: session?.dayKey ?? null,
             message: decodeURIComponent(whatsappUrl.split("text=")[1] ?? ""),
             phone_number: whatsappNumber,
+            session_id: session?.id ?? null,
             task_text: task.text,
           },
           related_id: task.id,
@@ -55,6 +68,14 @@ export const OpenWhatsAppButton = ({
           type: "whatsapp.opened",
         },
       });
+
+      if (
+        typeof window !== "undefined" &&
+        window.localStorage &&
+        window.sessionStorage
+      ) {
+        recordWhatsappOpened(window.localStorage, window.sessionStorage);
+      }
 
       window.open(whatsappUrl, "_blank", "noopener,noreferrer");
     } catch (error) {

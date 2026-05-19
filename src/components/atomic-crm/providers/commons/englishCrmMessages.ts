@@ -585,6 +585,23 @@ export const englishCrmMessages = {
       kicker: "Inicio operativo",
       description:
         "Este es el espacio diario de Claridad. Los widgets con datos reales irán aterrizando en los siguientes slices.",
+      core_metric: {
+        title: "Claridad antes de WhatsApp",
+        days_before_whatsapp_value:
+          "%{smart_count} dia esta semana |||| %{smart_count} dias esta semana",
+        days_before_whatsapp_hint:
+          "Dias en los que Claridad se abrio antes del primer toque de WhatsApp desde la app.",
+        active_days_title: "Dias activos",
+        active_days_value:
+          "%{smart_count} dia con apertura |||| %{smart_count} dias con apertura",
+        active_days_hint:
+          "Aperturas registradas en esta semana desde este dispositivo.",
+        whatsapp_touches_title: "Toques de WhatsApp",
+        whatsapp_touches_value:
+          "%{smart_count} toque desde Claridad |||| %{smart_count} toques desde Claridad",
+        whatsapp_touches_hint:
+          "Uso semanal del CTA de WhatsApp dentro del flujo operativo.",
+      },
       greeting_with_name: "%{greeting}, %{name}",
       greetings: {
         morning: "Buenos dias",
