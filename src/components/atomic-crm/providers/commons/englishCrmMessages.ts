@@ -653,7 +653,26 @@ export const englishCrmMessages = {
           view_all: "Ver todas (%{smart_count})",
         },
         appointments: {
-          description: "Las citas de hoy y sus accesos rapidos viviran aqui.",
+          title: "Citas de hoy (%{smart_count})",
+          description:
+            "Las citas pendientes y confirmadas de hoy aparecen aqui para que no se te escape ninguna.",
+          open_contact: "Abrir ficha",
+          empty_title: "No tienes citas hoy.",
+          empty_description: "Tu agenda queda libre para seguimientos y mensajes.",
+          view_all: "Ver todas (%{smart_count})",
+          statuses: {
+            pending: "Pendiente",
+            confirmed: "Confirmada",
+            completed: "Realizada",
+            cancelled: "Cancelada",
+          },
+          types: {
+            consultation: "Asesoria",
+            delivery: "Entrega",
+            demonstration: "Demostracion",
+            follow_up: "Seguimiento",
+            video_call: "Videollamada",
+          },
         },
         touch_this_week: {
           title: "Toca esta semana",

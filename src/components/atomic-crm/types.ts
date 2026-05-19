@@ -170,6 +170,7 @@ export type Appointment = {
   status: string;
   scheduled_at: string;
   notes?: string | null;
+  sales_id?: Identifier;
   created_at?: string;
   updated_at?: string;
 } & Pick<RaRecord, "id">;
