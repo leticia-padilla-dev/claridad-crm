@@ -175,26 +175,35 @@ export type Appointment = {
 } & Pick<RaRecord, "id">;
 
 export type CustomerEventType =
-  | "contact.created"
   | "note.created"
+  | "note.updated"
   | "task.created"
   | "task.completed"
+  | "task.snoozed"
   | "appointment.created"
   | "appointment.completed"
   | "appointment.cancelled"
   | "opportunity.created"
   | "opportunity.stage_changed"
+  | "opportunity.won"
+  | "opportunity.lost"
   | "whatsapp.opened"
   | "session.opened"
+  | "email.sent"
+  | "order.created"
+  | "order.paid"
+  | "order.delivered"
   | "catalog.shared"
-  | "birthday.celebrated";
+  | "birthday.celebrated"
+  | "reactivation.attempted";
 
 export type CustomerEventSource =
   | "manual"
   | "system"
   | "calendar_sync"
   | "csv_import"
-  | "whatsapp_link";
+  | "whatsapp_link"
+  | "app_launch";
 
 export type CustomerEvent = {
   contact_id: Identifier;
