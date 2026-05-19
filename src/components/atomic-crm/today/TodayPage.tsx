@@ -1,11 +1,5 @@
 import { ErrorBoundary } from "react-error-boundary";
-import {
-  CalendarDays,
-  ChevronRight,
-  HandHeart,
-  Sparkles,
-  Cake,
-} from "lucide-react";
+import { CalendarDays, ChevronRight, HandHeart, Sparkles } from "lucide-react";
 import { useGetIdentity, useTranslate } from "ra-core";
 import { Link } from "react-router";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -15,6 +9,7 @@ import MobileHeader from "../layout/MobileHeader";
 import { MobileContent } from "../layout/MobileContent";
 import { useConfigurationContext } from "../root/ConfigurationContext";
 import { useCoreMetric } from "../metrics/useCoreMetric";
+import { TodayBirthdaysSection } from "./TodayBirthdaysSection";
 import { TodayOverdueTasksSection } from "./TodayOverdueTasksSection";
 
 type SectionConfig = {
@@ -195,13 +190,6 @@ const TodayPageContent = () => {
 
   const sections: SectionConfig[] = [
     {
-      id: "birthdays",
-      title: translate("crm.today.sections.birthdays.title"),
-      description: translate("crm.today.sections.birthdays.description"),
-      icon: Cake,
-      skeletonRows: 3,
-    },
-    {
       id: "appointments",
       title: translate("resources.appointments.name", { smart_count: 2 }),
       description: translate("crm.today.sections.appointments.description"),
@@ -234,6 +222,17 @@ const TodayPageContent = () => {
           )}
         >
           <TodayOverdueTasksSection />
+        </ErrorBoundary>
+        <ErrorBoundary
+          fallbackRender={() => (
+            <SectionErrorFallback
+              title={translate("crm.today.sections.birthdays.title", {
+                smart_count: 0,
+              })}
+            />
+          )}
+        >
+          <TodayBirthdaysSection />
         </ErrorBoundary>
         {sections.map((section) => (
           <ErrorBoundary

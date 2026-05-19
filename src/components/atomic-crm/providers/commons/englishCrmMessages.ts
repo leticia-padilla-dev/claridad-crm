@@ -643,9 +643,14 @@ export const englishCrmMessages = {
             "Pendiente desde ayer |||| Pendiente desde hace %{smart_count} dias",
         },
         birthdays: {
-          title: "Cumpleanos",
+          title: "Cumpleanos hoy (%{smart_count})",
           description:
-            "Los proximos cumpleanos y momentos clave de clientas apareceran aqui para facilitar el seguimiento proactivo.",
+            "Las clientas que cumplen hoy aparecen aqui para facilitar un gesto humano con timing comercial ligero.",
+          today_label: "Cumple hoy",
+          send_greeting: "Felicitar por WhatsApp",
+          empty_title: "Nadie cumple hoy.",
+          empty_description: "Puedes dedicar el dia a seguimientos y citas.",
+          view_all: "Ver todas (%{smart_count})",
         },
         appointments: {
           description: "Las citas de hoy y sus accesos rapidos viviran aqui.",

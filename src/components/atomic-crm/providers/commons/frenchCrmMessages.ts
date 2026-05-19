@@ -650,9 +650,15 @@ export const frenchCrmMessages = {
             "En attente depuis hier |||| En attente depuis %{smart_count} jours",
         },
         birthdays: {
-          title: "Anniversaires",
+          title: "Anniversaires du jour (%{smart_count})",
           description:
-            "Les anniversaires à venir et moments client apparaîtront ici pour préparer les prises de contact.",
+            "Les clientes qui fetent leur anniversaire aujourd'hui apparaissent ici pour faciliter un geste humain avec un bon timing relationnel.",
+          today_label: "Anniversaire aujourd'hui",
+          send_greeting: "Felicitations via WhatsApp",
+          empty_title: "Aucun anniversaire aujourd'hui.",
+          empty_description:
+            "Tu peux te concentrer sur les suivis et les rendez-vous.",
+          view_all: "Voir toutes (%{smart_count})",
         },
         appointments: {
           description:
