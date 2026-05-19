@@ -119,21 +119,18 @@ describe("TodayAppointmentsSection", () => {
       </StoryWrapper>,
     );
 
-    await expect
-      .element(screen.getByText("Citas de hoy (2)"))
-      .toBeVisible();
+    await expect.element(screen.getByText("Citas de hoy (2)")).toBeVisible();
     await expect.element(screen.getByText("Laura Perez")).toBeVisible();
     await expect.element(screen.getByText("Andrea Lema")).toBeVisible();
     await expect.element(screen.getByText("Entrega")).toBeVisible();
     await expect.element(screen.getByText(/^Videollamada$/)).toBeVisible();
     await expect.element(screen.getByText(/^Confirmada$/)).toBeVisible();
     await expect
-      .poll(
-        () => screen.container.textContent?.includes("Marta Ruiz") ?? false,
-      )
+      .poll(() => screen.container.textContent?.includes("Marta Ruiz") ?? false)
       .toBe(false);
 
-    const lauraIndex = screen.container.textContent?.indexOf("Laura Perez") ?? -1;
+    const lauraIndex =
+      screen.container.textContent?.indexOf("Laura Perez") ?? -1;
     const andreaIndex =
       screen.container.textContent?.indexOf("Andrea Lema") ?? -1;
 

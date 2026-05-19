@@ -17,11 +17,7 @@ import {
   contactBusinessLines,
   translateContactBusinessLineLabel,
 } from "../contacts/contactModel";
-import type {
-  Appointment,
-  Contact,
-  ContactBusinessLineValue,
-} from "../types";
+import type { Appointment, Contact, ContactBusinessLineValue } from "../types";
 
 const MAX_VISIBLE_APPOINTMENTS = 5;
 const ACTIVE_STATUSES = new Set(["pending", "confirmed"]);
@@ -116,9 +112,8 @@ const AppointmentCard = ({
     ? `${contact.first_name} ${contact.last_name}`.trim()
     : translate("resources.contacts.forcedCaseName", { _: "Clienta" });
   const typeLabel = translate(
-    appointmentTypes[
-      appointment.type as keyof typeof appointmentTypes
-    ] ?? appointment.type,
+    appointmentTypes[appointment.type as keyof typeof appointmentTypes] ??
+      appointment.type,
     {
       _: appointment.type,
     },
@@ -184,10 +179,7 @@ export const TodayAppointmentsSection = () => {
   const nextDay = new Date(dayStart);
   nextDay.setDate(nextDay.getDate() + 1);
 
-  const {
-    data: appointments = [],
-    isPending,
-  } = useGetList<Appointment>(
+  const { data: appointments = [], isPending } = useGetList<Appointment>(
     "appointments",
     {
       pagination: { page: 1, perPage: MAX_VISIBLE_APPOINTMENTS + 1 },
@@ -211,7 +203,10 @@ export const TodayAppointmentsSection = () => {
     [appointments],
   );
 
-  const visibleAppointments = todaysAppointments.slice(0, MAX_VISIBLE_APPOINTMENTS);
+  const visibleAppointments = todaysAppointments.slice(
+    0,
+    MAX_VISIBLE_APPOINTMENTS,
+  );
   const contactIds = useMemo(
     () =>
       Array.from(

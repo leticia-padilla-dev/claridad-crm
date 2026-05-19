@@ -658,7 +658,8 @@ export const englishCrmMessages = {
             "Las citas pendientes y confirmadas de hoy aparecen aqui para que no se te escape ninguna.",
           open_contact: "Abrir ficha",
           empty_title: "No tienes citas hoy.",
-          empty_description: "Tu agenda queda libre para seguimientos y mensajes.",
+          empty_description:
+            "Tu agenda queda libre para seguimientos y mensajes.",
           view_all: "Ver todas (%{smart_count})",
           statuses: {
             pending: "Pendiente",
