@@ -126,7 +126,9 @@ describe("TodayWeeklyTouchCountersSection", () => {
     );
 
     await expect.element(screen.getByText("Toca esta semana")).toBeVisible();
-    await expect.element(screen.getByText("Clientas sin contacto")).toBeVisible();
+    await expect
+      .element(screen.getByText("Clientas sin contacto"))
+      .toBeVisible();
     await expect
       .element(screen.getByText("Oportunidades sin actividad"))
       .toBeVisible();
@@ -140,7 +142,9 @@ describe("TodayWeeklyTouchCountersSection", () => {
     await expect
       .element(screen.getByTestId("weekly-touch-birthdays-count"))
       .toHaveTextContent("1");
-    await expect.element(screen.getByRole("link", { name: "Ver clientas" })).toHaveAttribute("href", "/contacts");
+    await expect
+      .element(screen.getByRole("link", { name: "Ver clientas" }))
+      .toHaveAttribute("href", "/contacts");
     await expect
       .element(screen.getByRole("link", { name: "Ver oportunidades" }))
       .toHaveAttribute("href", "/deals");

@@ -1,7 +1,12 @@
 import { useMemo } from "react";
 import { addDays, differenceInCalendarDays, startOfDay } from "date-fns";
 import { ArrowRight, HandHeart, Sparkles } from "lucide-react";
-import { useGetIdentity, useGetList, useTranslate, type Identifier } from "ra-core";
+import {
+  useGetIdentity,
+  useGetList,
+  useTranslate,
+  type Identifier,
+} from "ra-core";
 import { Link } from "react-router";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -97,15 +102,16 @@ export const TodayWeeklyTouchCountersSection = () => {
   const translate = useTranslate();
   const { identity } = useGetIdentity();
 
-  const { data: contacts = [], isPending: contactsPending } = useGetList<Contact>(
-    "contacts",
-    {
-      pagination: { page: 1, perPage: 500 },
-      sort: { field: "last_seen", order: "DESC" },
-      filter: { sales_id: identity?.id },
-    },
-    { enabled: !!identity },
-  );
+  const { data: contacts = [], isPending: contactsPending } =
+    useGetList<Contact>(
+      "contacts",
+      {
+        pagination: { page: 1, perPage: 500 },
+        sort: { field: "last_seen", order: "DESC" },
+        filter: { sales_id: identity?.id },
+      },
+      { enabled: !!identity },
+    );
 
   const { data: customerEvents = [], isPending: eventsPending } =
     useGetList<CustomerEvent>(
@@ -218,13 +224,20 @@ export const TodayWeeklyTouchCountersSection = () => {
         ) : (
           <>
             <CounterRow
-              title={translate("crm.today.sections.touch_this_week.rows.no_contact.title")}
+              title={translate(
+                "crm.today.sections.touch_this_week.rows.no_contact.title",
+              )}
               count={noContactCount}
-              hint={translate("crm.today.sections.touch_this_week.rows.no_contact.hint", {
-                smart_count: CONTACT_STALE_DAYS,
-              })}
+              hint={translate(
+                "crm.today.sections.touch_this_week.rows.no_contact.hint",
+                {
+                  smart_count: CONTACT_STALE_DAYS,
+                },
+              )}
               linkTo="/contacts"
-              ctaLabel={translate("crm.today.sections.touch_this_week.rows.no_contact.cta")}
+              ctaLabel={translate(
+                "crm.today.sections.touch_this_week.rows.no_contact.cta",
+              )}
               countTestId="weekly-touch-no-contact-count"
             />
             <CounterRow
@@ -263,7 +276,9 @@ export const TodayWeeklyTouchCountersSection = () => {
             />
             <div className="flex items-center gap-2 rounded-lg border border-dashed border-violet-200 bg-violet-50/60 px-3 py-3 text-sm text-muted-foreground dark:border-violet-900 dark:bg-violet-950/20">
               <Sparkles className="size-4 shrink-0 text-violet-600 dark:text-violet-300" />
-              <span>{translate("crm.today.sections.touch_this_week.footer")}</span>
+              <span>
+                {translate("crm.today.sections.touch_this_week.footer")}
+              </span>
             </div>
           </>
         )}
