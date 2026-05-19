@@ -174,6 +174,50 @@ export type Appointment = {
   updated_at?: string;
 } & Pick<RaRecord, "id">;
 
+export type CustomerEventType =
+  | "note.created"
+  | "note.updated"
+  | "task.created"
+  | "task.completed"
+  | "task.snoozed"
+  | "appointment.created"
+  | "appointment.completed"
+  | "appointment.cancelled"
+  | "opportunity.created"
+  | "opportunity.stage_changed"
+  | "opportunity.won"
+  | "opportunity.lost"
+  | "whatsapp.opened"
+  | "session.opened"
+  | "email.sent"
+  | "order.created"
+  | "order.paid"
+  | "order.delivered"
+  | "catalog.shared"
+  | "birthday.celebrated"
+  | "reactivation.attempted";
+
+export type CustomerEventSource =
+  | "manual"
+  | "system"
+  | "calendar_sync"
+  | "csv_import"
+  | "whatsapp_link"
+  | "app_launch";
+
+export type CustomerEvent = {
+  contact_id: Identifier;
+  business_line_id?: Identifier | null;
+  type: CustomerEventType;
+  occurred_at: string;
+  payload?: Record<string, unknown> | null;
+  source: CustomerEventSource;
+  sales_id?: Identifier | null;
+  related_table?: string | null;
+  related_id?: Identifier | null;
+  created_at?: string;
+} & Pick<RaRecord, "id">;
+
 export type ActivityCompanyCreated = {
   type: typeof COMPANY_CREATED;
   company_id: Identifier;

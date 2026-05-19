@@ -1,5 +1,6 @@
 import { useDataProvider, type DataProvider, type Identifier } from "ra-core";
 import { render } from "vitest-browser-react";
+import { vi } from "vitest";
 import { buildContact, StoryWrapper } from "@/test/StoryWrapper";
 import { TodayOverdueTasksSection } from "./TodayOverdueTasksSection";
 
@@ -164,5 +165,105 @@ describe("TodayOverdueTasksSection", () => {
     await expect
       .element(screen.getByText("No hay seguimientos pendientes."))
       .toBeVisible();
+  });
+
+  it("disables the WhatsApp CTA when the contact has no number", async () => {
+    const screen = await render(
+      <StoryWrapper
+        data={{
+          contacts: [
+            buildContact({
+              id: 1,
+              first_name: "Jane",
+              last_name: "Smith",
+              sales_id: salesId,
+              phone_jsonb: [],
+              whatsapp: null,
+            }),
+          ],
+          tasks: [
+            createTask({
+              id: 1,
+              contact_id: 1,
+              dueDate: "2026-05-10T09:00:00.000Z",
+              text: "Follow up with Jane",
+            }),
+          ],
+        }}
+      >
+        <TodayOverdueTasksSection />
+      </StoryWrapper>,
+    );
+
+    await expect.element(screen.getByText("Follow up with Jane")).toBeVisible();
+    await expect
+      .element(screen.getByRole("button", { name: "Abrir WhatsApp" }))
+      .toBeDisabled();
+  });
+
+  it("opens WhatsApp and registers a customer event", async () => {
+    let dataProvider: DataProvider | null = null;
+    const windowOpenSpy = vi
+      .spyOn(window, "open")
+      .mockImplementation(() => null as any);
+
+    const DataProviderListener = () => {
+      dataProvider = useDataProvider();
+      return null;
+    };
+
+    const screen = await render(
+      <StoryWrapper
+        data={{
+          contacts: [
+            buildContact({
+              id: 1,
+              first_name: "Jane",
+              last_name: "Smith",
+              sales_id: salesId,
+              whatsapp: "+34 612 34 56 78",
+              business_lines_interest: ["mary-kay"],
+            }),
+          ],
+          tasks: [
+            createTask({
+              id: 1,
+              contact_id: 1,
+              dueDate: "2026-05-10T09:00:00.000Z",
+              text: "Follow up with Jane",
+            }),
+          ],
+        }}
+      >
+        <DataProviderListener />
+        <TodayOverdueTasksSection />
+      </StoryWrapper>,
+    );
+
+    await expect.element(screen.getByText("Follow up with Jane")).toBeVisible();
+
+    await screen.getByRole("button", { name: "Abrir WhatsApp" }).click();
+
+    await expect
+      .poll(async () => {
+        const { data } = await dataProvider!.getList("customer_events", {
+          filter: { type: "whatsapp.opened" },
+          pagination: { page: 1, perPage: 10 },
+          sort: { field: "id", order: "DESC" },
+        });
+
+        return data.length;
+      })
+      .toBe(1);
+
+    expect(windowOpenSpy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        "https://wa.me/34612345678?text=Hola%20Jane%2C%20te%20escribo",
+      ),
+      "_blank",
+      "noopener,noreferrer",
+    );
+
+    windowOpenSpy.mockRestore();
   });
 });
