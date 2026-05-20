@@ -20,7 +20,7 @@ Aplica a:
 |---|---|---|---|
 | `id` | `bigint` identity | sí | PK autoincremental |
 | `contact_id` | `bigint` FK → `contacts` | sí | Clienta o prospecto |
-| `business_line` | `text` check | sí | `'incruises'` \| `'mary-kay'` \| `'beyond-beauty'` \| `'other'` |
+| `business_line` | `text` check | sí | `'incruises'` \| `'mary-kay'` \| `'beyond-beauty'` |
 | `title` | `text` | sí | Descripción corta de la oportunidad ("Crucero Caribe nov 2026", "Asesoría nutrición") |
 | `status` | `text` check | sí | Ver estados más abajo |
 | `notes` | `text` | no | Observaciones de seguimiento libre |
@@ -40,19 +40,19 @@ Aplica a:
 ## Estados y transiciones
 
 ```
-nueva → activa → en_evaluación → ganada
+nueva → activa → en_evaluacion → ganada
                               ↘
                                perdida
                                pausada
 
-  (activa y en_evaluación también pueden → pausada o perdida)
+  (activa y en_evaluacion también pueden → pausada o perdida)
 ```
 
 | Estado | Significado |
 |---|---|
 | `nueva` | Interés detectado, aún no hay seguimiento activo |
 | `activa` | Seguimiento en curso, hay contacto reciente |
-| `en_evaluación` | La clienta está considerando activamente, cerca de decidir |
+| `en_evaluacion` | La clienta está considerando activamente, cerca de decidir |
 | `pausada` | Interés existe pero la clienta pidió esperar o no hay respuesta |
 | `ganada` | Oportunidad cerrada positivamente (reserva, contrato, acuerdo) |
 | `perdida` | Oportunidad cerrada negativamente (no le interesó, eligió otra opción) |
@@ -66,13 +66,14 @@ nueva → activa → en_evaluación → ganada
 ```
 contacts 1 ──< opportunities
                   │
-                  └── business_line: 'incruises' | 'mary-kay' | 'beyond-beauty' | 'other'
+                  └── business_line: 'incruises' | 'mary-kay' | 'beyond-beauty'
                   └── sales_id → sales
 ```
 
 - Un contacto puede tener múltiples oportunidades abiertas simultáneamente (una por crucero, una por asesoría, etc.).
 - No hay relación directa con `catalog_links` en V1 — si el origen fue un catálogo compartido, se captura en `notes`.
 - La relación futura con `orders` ("oportunidad ganada → genera pedido") se modelará cuando `orders` esté implementado, via `related_order_id`.
+- `business_line` acepta solo `'incruises'`, `'mary-kay'` y `'beyond-beauty'` en V1 — consistente con `catalog_links`. No se añade `'other'` porque toda oportunidad real de Yoli pertenece a una de las tres líneas activas. Si surge una nueva línea de negocio, se añade en ese momento como slice propio.
 
 ---
 

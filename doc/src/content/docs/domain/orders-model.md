@@ -21,7 +21,7 @@ Aplica únicamente a:
 | `contact_id` | `bigint` FK → `contacts` | sí | Clienta que hace el pedido |
 | `business_line` | `text` check | sí | `'mary-kay'` \| `'beyond-beauty'` |
 | `status` | `text` check | sí | Ver estados más abajo |
-| `total_amount` | `numeric(10,2)` | no | Monto total en MXN. Null si no se captura al crear |
+| `total_amount` | `numeric(10,2)` | no | Monto total en la moneda configurada del sistema. Null si no se captura al crear |
 | `notes` | `text` | no | Observaciones libres (qué pidió, acordado, etc.) |
 | `catalog_link_id` | `bigint` FK → `catalog_links` | no | Catálogo o enlace de campaña que originó el pedido. Null si el pedido llega por otro canal |
 | `sales_id` | `bigint` FK → `sales` | no | Vendedora que registra. Null = sin asignar |
