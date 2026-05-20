@@ -36,7 +36,7 @@ test("user adds a tag to several contacts", async ({
   await page.getByLabel("Password").fill("password");
   await page.getByRole("button", { name: "Sign in" }).click();
 
-  await expect(page).toHaveTitle(/Atomic CRM/);
+  await expect(page).toHaveTitle(/Claridad CRM/);
   await expect(page.getByRole("link", { name: "Clients" })).toBeVisible();
 
   await menu.goToContacts();

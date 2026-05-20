@@ -6,10 +6,10 @@ import path from "node:path";
 
 const registryPath = "registry.json";
 const basePath = "src";
-const atomicCrmComponentsPath = path.join(basePath, "components", "atomic-crm");
-const supabaseComponentsPath = path.join(basePath, "components", "supabase");
-const hooksPath = path.join(basePath, "hooks");
-const libPath = path.join(basePath, "lib");
+const atomicCrmComponentsPath = "src/components/atomic-crm";
+const supabaseComponentsPath = "src/components/supabase";
+const hooksPath = "src/hooks";
+const libPath = "src/lib";
 
 const excludedHooks = [
   "filter-context.tsx",
@@ -30,45 +30,47 @@ const testFilePattern = "**/*.{test,spec}.*";
 const storyFilePattern = "**/*.stories.*";
 
 const atomicCrmComponents = globSync(
-  path.join(atomicCrmComponentsPath, "**", "*.ts*"),
+  `${atomicCrmComponentsPath}/**/*.ts*`,
   { ignore: [testFilePattern, storyFilePattern] },
 );
 const supabaseComponents = globSync(
-  path.join(supabaseComponentsPath, "**", "*.ts*"),
+  `${supabaseComponentsPath}/**/*.ts*`,
   { ignore: [testFilePattern, storyFilePattern] },
 );
-const hooks = globSync(path.join(hooksPath, "**", "*.ts*")).filter((hook) => {
+const hooks = globSync(`${hooksPath}/**/*.ts*`).filter((hook) => {
   return !excludedHooks.includes(path.basename(hook));
 });
-const libFiles = globSync(path.join(libPath, "**", "*.ts*")).filter((file) => {
+const libFiles = globSync(`${libPath}/**/*.ts*`).filter((file) => {
   return !excludedLibFiles.includes(path.basename(file));
 });
 const changelogPath = "CHANGELOG.md";
 
 const registryContent = JSON.parse(fs.readFileSync(registryPath, "utf-8"));
 
+const toForwardSlash = (p) => p.replace(/\\/g, "/");
+
 const files = [
-  ...atomicCrmComponents.map((path) => {
+  ...atomicCrmComponents.map((p) => {
     return {
-      path,
+      path: toForwardSlash(p),
       type: "registry:component",
     };
   }),
-  ...supabaseComponents.map((path) => {
+  ...supabaseComponents.map((p) => {
     return {
-      path,
+      path: toForwardSlash(p),
       type: "registry:component",
     };
   }),
-  ...hooks.map((path) => {
+  ...hooks.map((p) => {
     return {
-      path,
+      path: toForwardSlash(p),
       type: "registry:hook",
     };
   }),
-  ...libFiles.map((path) => {
+  ...libFiles.map((p) => {
     return {
-      path,
+      path: toForwardSlash(p),
       type: "registry:lib",
     };
   }),
