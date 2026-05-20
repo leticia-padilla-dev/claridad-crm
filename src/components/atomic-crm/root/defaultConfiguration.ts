@@ -6,7 +6,7 @@ export const defaultLightModeLogo = clarityLogo;
 
 export const defaultCurrency = "USD";
 
-export const defaultTitle = "Atomic CRM";
+export const defaultTitle = "Claridad CRM";
 
 export const defaultCompanySectors = [
   { value: "communication-services", label: "Communication Services" },
